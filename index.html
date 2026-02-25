@@ -189,12 +189,22 @@ body {
 }
 .page-header {
     text-align: center;
-    padding: 8rem 2rem 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    padding: 8rem 2rem 3rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, #0f3460 100%);
     color: white;
-    margin-top: 0;
+    position: relative;
+    overflow: hidden;
+}
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 400px; height: 400px;
+    background: var(--accent);
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.1;
+    pointer-events: none;
 }
 .page-header h1 {
     font-size: 2.5rem;
@@ -202,10 +212,12 @@ body {
     margin-bottom: 0.5rem;
     font-weight: 800;
     letter-spacing: 2px;
+    position: relative;
 }
 .page-header p {
     color: rgba(255,255,255,0.7);
     font-size: 1.1rem;
+    position: relative;
 }
 
 /* === Notion Blocks === */
@@ -276,6 +288,9 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
 }
 .notion-image img {
     max-width: 100%;
+    max-height: 500px;
+    width: auto;
+    object-fit: contain;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
     transition: transform 0.3s;
@@ -286,6 +301,12 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
     color: var(--text-light);
     font-size: 0.9rem;
 }
+/* 컬럼 내 이미지는 꽉 채움 */
+.column .notion-image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
 
 /* === Columns === */
 .columns {
@@ -294,6 +315,9 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
     gap: 2rem;
     margin: 2rem 0;
 }
+.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cols-4 { grid-template-columns: repeat(2, 1fr); }  /* 4는 2x2로 표시 */
 .column {
     background: var(--white);
     border-radius: 16px;
@@ -460,7 +484,7 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
     .hero h1 { font-size: 2.2rem; letter-spacing: 2px; }
     .hero { min-height: 70vh; padding: 5rem 1.5rem; }
     .hero-glow { display: none; }
-    .columns { grid-template-columns: 1fr; }
+    .columns, .cols-2, .cols-3, .cols-4 { grid-template-columns: 1fr; }
     .content { padding: 2rem 1rem 3rem; }
     .footer-content { grid-template-columns: 1fr; }
     .page-header { padding: 6rem 1.5rem 1.5rem; }
@@ -485,7 +509,7 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
         </section>
         
     <main class="content">
-        <div class="spacer"></div><div class="callout"><span class="callout-icon">✨</span><div class="callout-text"><strong>마블플루이드아트의 아름다움을, 세상에 전합니다.</strong></div></div><div class="spacer"></div><div class="columns"><div class="column"><div class="callout"><span class="callout-icon">👥</span><div class="callout-text"><strong>420+</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">🏆</span><div class="callout-text"><strong>10+</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">🏫</span><div class="callout-text"><strong>30+</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">📜</span><div class="callout-text"><strong>7</strong></div></div></div></div><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>협회 소개</strong></h1><div class="spacer"></div><blockquote class="notion-quote">“예술은 삶을 아름답게 하고, 공예는 예술을 일상으로 가져옵니다.”</blockquote><div class="spacer"></div><p>한국아트크래프트협회(Korea Art Craft Association)는 마블플루이드아트, 레진아트, 크리스탈레진 등 다양한 아트크래프트 분야의 전문가와 애호가들이 함께하는 비영리 협회입니다.</p><div class="spacer"></div><p>2022년 창립 이후, 전국 각지에서 420명 이상의 회원이 활동하고 있으며, 정기 전시회, 체계적인 교육 프로그램, 자격증 제도를 통해 한국 공예 문화의 발전에 기여하고 있습니다.</p><div class="spacer"></div><div class="columns"><div class="column"><div class="callout"><span class="callout-icon">🌟</span><div class="callout-text"><strong>협회 비전</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">💎</span><div class="callout-text"><strong>핵심 가치</strong></div></div></div></div><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>전시회 &amp; 갤러리</strong></h1><div class="spacer"></div><p>마블플루이드아트의 다채로운 색채와 유동적인 패턴을 만나보세요. 협회는 매년 2~3회 정기 전시회를 개최하고 있습니다.</p><div class="spacer"></div><figure class="notion-image"><img src="https://images.unsplash.com/photo-1531913764164-f85c3e01b2aa?w=1200&q=80" alt="<span style="color:#9b9a97"><em>마블플루이드아트 작품 예시</em></span>" loading="lazy"><figcaption><span style="color:#9b9a97"><em>마블플루이드아트 작품 예시</em></span></figcaption></figure><div class="spacer"></div><div class="columns"><div class="column"><div class="callout"><span class="callout-icon">📅</span><div class="callout-text"><strong>🌸 2026 봄 전시회</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">📅</span><div class="callout-text"><strong>🍂 2025 가을 전시회</strong></div></div></div></div><div class="spacer"></div><figure class="notion-image"><img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1200&q=80" alt="<span style="color:#9b9a97"><em>전시회 풍경</em></span>" loading="lazy"><figcaption><span style="color:#9b9a97"><em>전시회 풍경</em></span></figcaption></figure><div class="spacer"></div><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>교육 프로그램</strong></h1><div class="spacer"></div><p>초보자부터 전문가까지, 단계별 커리큘럼으로 마블플루이드아트를 배울 수 있습니다. 전국 30개 이상의 교육처에서 수강하실 수 있습니다.</p><div class="spacer"></div><div class="columns"><div class="column"><div class="callout"><span class="callout-icon">1️⃣</span><div class="callout-text"><strong>기초 과정</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">2️⃣</span><div class="callout-text"><strong>심화 과정</strong></div></div></div></div><div class="spacer"></div><div class="columns"><div class="column"><div class="callout"><span class="callout-icon">⚡</span><div class="callout-text"><strong>원데이 클래스</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">🏆</span><div class="callout-text"><strong>자격증 과정</strong></div></div></div></div><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>제품 &amp; 작품</strong></h1><div class="spacer"></div><p>협회 소속 아티스트들의 작품과 협회 전용 공예 재료를 소개합니다.</p><div class="spacer"></div><figure class="notion-image"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200&q=80" alt="<span style="color:#9b9a97"><em>마블플루이드아트 작품</em></span>" loading="lazy"><figcaption><span style="color:#9b9a97"><em>마블플루이드아트 작품</em></span></figcaption></figure><div class="spacer"></div><div class="columns"><div class="column"><div class="callout"><span class="callout-icon">💎</span><div class="callout-text"><strong>퓨어리움 (Purelium)</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">✨</span><div class="callout-text"><strong>크리스탈레진</strong></div></div></div></div><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>자주 묻는 질문</strong></h1><div class="spacer"></div><details class="notion-toggle"><summary><strong>협회 가입은 어떻게 하나요?</strong></summary><div class="toggle-content"><p>협회 가입은 이메일(info@kaca.or.kr) 또는 전화로 문의해 주시면 안내드립니다. 연회비와 회원 혜택에 대해 상세히 안내해 드리겠습니다.</p></div></details><details class="notion-toggle"><summary><strong>교육 수강 신청은 어디서 하나요?</strong></summary><div class="toggle-content"><p>전국 30개 이상의 교육처에서 수강 가능합니다. 원하시는 지역과 과정을 알려주시면 가까운 교육처를 안내해 드립니다.</p></div></details><details class="notion-toggle"><summary><strong>전시회 참가 신청은 어떻게 하나요?</strong></summary><div class="toggle-content"><p>정기 전시회는 매년 봄/가을 개최되며, 협회원이면 누구나 참가 신청할 수 있습니다. 전시 일정이 확정되면 공지를 통해 안내드립니다.</p></div></details><details class="notion-toggle"><summary><strong>자격증은 어떤 종류가 있나요?</strong></summary><div class="toggle-content"><p>현재 7개 과정의 자격증을 운영하고 있습니다. 기초부터 전문가 과정까지, 단계별로 자격을 취득할 수 있습니다. 상세 커리큘럼은 교육 프로그램 섹션을 참고해 주세요.</p></div></details><details class="notion-toggle"><summary><strong>원데이 클래스는 누구나 참여할 수 있나요?</strong></summary><div class="toggle-content"><p>네! 원데이 클래스는 비회원도 참여 가능합니다. 개인, 커플, 가족, 기업 단체 등 다양한 형태로 운영되고 있습니다. 예약 문의는 이메일로 부탁드립니다.</p></div></details><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>문의하기</strong></h1><div class="spacer"></div><p>협회 가입, 교육 수강, 전시회 참가, 제품 구매 등 궁금한 점이 있으시면 편하게 연락해 주세요.</p><div class="spacer"></div><div class="columns"><div class="column"><div class="callout"><span class="callout-icon">📞</span><div class="callout-text"><strong>연락처</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">🔗</span><div class="callout-text"><strong>SNS</strong></div></div></div></div><hr class="notion-divider"><div class="spacer"></div><p><span style="color:#9b9a97"><em>© 2026 한국아트크래프트협회 (KACA)  |  Powered by WOOKVAN</em></span></p><div class="spacer"></div>
+        <div class="spacer"></div><div class="callout"><span class="callout-icon">✨</span><div class="callout-text"><strong>마블플루이드아트의 아름다움을, 세상에 전합니다.</strong></div></div><div class="spacer"></div><div class="columns cols-4"><div class="column"><div class="callout"><span class="callout-icon">👥</span><div class="callout-text"><strong>420+</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">🏆</span><div class="callout-text"><strong>10+</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">🏫</span><div class="callout-text"><strong>30+</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">📜</span><div class="callout-text"><strong>7</strong></div></div></div></div><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>협회 소개</strong></h1><div class="spacer"></div><blockquote class="notion-quote">“예술은 삶을 아름답게 하고, 공예는 예술을 일상으로 가져옵니다.”</blockquote><div class="spacer"></div><p>한국아트크래프트협회(Korea Art Craft Association)는 마블플루이드아트, 레진아트, 크리스탈레진 등 다양한 아트크래프트 분야의 전문가와 애호가들이 함께하는 비영리 협회입니다.</p><div class="spacer"></div><p>2022년 창립 이후, 전국 각지에서 420명 이상의 회원이 활동하고 있으며, 정기 전시회, 체계적인 교육 프로그램, 자격증 제도를 통해 한국 공예 문화의 발전에 기여하고 있습니다.</p><div class="spacer"></div><div class="columns cols-2"><div class="column"><div class="callout"><span class="callout-icon">🌟</span><div class="callout-text"><strong>협회 비전</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">💎</span><div class="callout-text"><strong>핵심 가치</strong></div></div></div></div><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>전시회 &amp; 갤러리</strong></h1><div class="spacer"></div><p>마블플루이드아트의 다채로운 색채와 유동적인 패턴을 만나보세요. 협회는 매년 2~3회 정기 전시회를 개최하고 있습니다.</p><div class="spacer"></div><figure class="notion-image"><img src="https://images.unsplash.com/photo-1531913764164-f85c3e01b2aa?w=1200&q=80" alt="마블플루이드아트 작품 예시" loading="lazy"><figcaption><span style="color:#9b9a97"><em>마블플루이드아트 작품 예시</em></span></figcaption></figure><div class="spacer"></div><div class="columns cols-2"><div class="column"><div class="callout"><span class="callout-icon">📅</span><div class="callout-text"><strong>🌸 2026 봄 전시회</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">📅</span><div class="callout-text"><strong>🍂 2025 가을 전시회</strong></div></div></div></div><div class="spacer"></div><figure class="notion-image"><img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1200&q=80" alt="전시회 풍경" loading="lazy"><figcaption><span style="color:#9b9a97"><em>전시회 풍경</em></span></figcaption></figure><div class="spacer"></div><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>교육 프로그램</strong></h1><div class="spacer"></div><p>초보자부터 전문가까지, 단계별 커리큘럼으로 마블플루이드아트를 배울 수 있습니다. 전국 30개 이상의 교육처에서 수강하실 수 있습니다.</p><div class="spacer"></div><div class="columns cols-2"><div class="column"><div class="callout"><span class="callout-icon">1️⃣</span><div class="callout-text"><strong>기초 과정</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">2️⃣</span><div class="callout-text"><strong>심화 과정</strong></div></div></div></div><div class="spacer"></div><div class="columns cols-2"><div class="column"><div class="callout"><span class="callout-icon">⚡</span><div class="callout-text"><strong>원데이 클래스</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">🏆</span><div class="callout-text"><strong>자격증 과정</strong></div></div></div></div><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>제품 &amp; 작품</strong></h1><div class="spacer"></div><p>협회 소속 아티스트들의 작품과 협회 전용 공예 재료를 소개합니다.</p><div class="spacer"></div><figure class="notion-image"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200&q=80" alt="마블플루이드아트 작품" loading="lazy"><figcaption><span style="color:#9b9a97"><em>마블플루이드아트 작품</em></span></figcaption></figure><div class="spacer"></div><div class="columns cols-2"><div class="column"><div class="callout"><span class="callout-icon">💎</span><div class="callout-text"><strong>퓨어리움 (Purelium)</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">✨</span><div class="callout-text"><strong>크리스탈레진</strong></div></div></div></div><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>자주 묻는 질문</strong></h1><div class="spacer"></div><details class="notion-toggle"><summary><strong>협회 가입은 어떻게 하나요?</strong></summary><div class="toggle-content"><p>협회 가입은 이메일(info@kaca.or.kr) 또는 전화로 문의해 주시면 안내드립니다. 연회비와 회원 혜택에 대해 상세히 안내해 드리겠습니다.</p></div></details><details class="notion-toggle"><summary><strong>교육 수강 신청은 어디서 하나요?</strong></summary><div class="toggle-content"><p>전국 30개 이상의 교육처에서 수강 가능합니다. 원하시는 지역과 과정을 알려주시면 가까운 교육처를 안내해 드립니다.</p></div></details><details class="notion-toggle"><summary><strong>전시회 참가 신청은 어떻게 하나요?</strong></summary><div class="toggle-content"><p>정기 전시회는 매년 봄/가을 개최되며, 협회원이면 누구나 참가 신청할 수 있습니다. 전시 일정이 확정되면 공지를 통해 안내드립니다.</p></div></details><details class="notion-toggle"><summary><strong>자격증은 어떤 종류가 있나요?</strong></summary><div class="toggle-content"><p>현재 7개 과정의 자격증을 운영하고 있습니다. 기초부터 전문가 과정까지, 단계별로 자격을 취득할 수 있습니다. 상세 커리큘럼은 교육 프로그램 섹션을 참고해 주세요.</p></div></details><details class="notion-toggle"><summary><strong>원데이 클래스는 누구나 참여할 수 있나요?</strong></summary><div class="toggle-content"><p>네! 원데이 클래스는 비회원도 참여 가능합니다. 개인, 커플, 가족, 기업 단체 등 다양한 형태로 운영되고 있습니다. 예약 문의는 이메일로 부탁드립니다.</p></div></details><hr class="notion-divider"><div class="spacer"></div><h1 class="notion-h1"><strong>문의하기</strong></h1><div class="spacer"></div><p>협회 가입, 교육 수강, 전시회 참가, 제품 구매 등 궁금한 점이 있으시면 편하게 연락해 주세요.</p><div class="spacer"></div><div class="columns cols-2"><div class="column"><div class="callout"><span class="callout-icon">📞</span><div class="callout-text"><strong>연락처</strong></div></div></div><div class="column"><div class="callout"><span class="callout-icon">🔗</span><div class="callout-text"><strong>SNS</strong></div></div></div></div><hr class="notion-divider"><div class="spacer"></div><p><span style="color:#9b9a97"><em>© 2026 한국아트크래프트협회 (KACA)  |  Powered by WOOKVAN</em></span></p><div class="spacer"></div>
     </main>
     
 <footer class="footer">
