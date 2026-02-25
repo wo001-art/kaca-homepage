@@ -1,237 +1,429 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>한국아트크래프트협회 | KACA</title>
-  <meta name="description" content="한국아트크래프트협회(KACA)는 예술 공예 문화의 발전과 보급을 위해 설립된 비영리 전문 단체입니다." />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국아트크래프트협회 홈페이지 제작 제안서 (고객 공유용)</title>
+<style>
+:root {
+  --navy: #0a1628;
+  --navy-light: #1a2a44;
+  --blue: #3b82f6;
+  --blue-light: #dbeafe;
+  --green: #22c55e;
+  --red: #ef4444;
+  --yellow: #fbbf24;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-600: #475569;
+  --gray-800: #1e293b;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-lg: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--gray-800);
+  line-height: 1.7;
+  background: var(--gray-50);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.site-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  color: white;
+  padding: 3rem 2rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.site-header::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.header-logo {
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+.header-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+.header-sub {
+  font-size: 1rem;
+  opacity: 0.8;
+  position: relative;
+  z-index: 1;
+}
+
+/* Nav */
+.site-nav {
+  background: white;
+  border-bottom: 1px solid var(--gray-200);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.site-nav::-webkit-scrollbar { height: 0; }
+.nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+}
+.site-nav a {
+  display: inline-block;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.site-nav a:hover {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+  background: var(--gray-50);
+}
+
+/* Main */
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+
+section {
+  padding-top: 2rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 2.5rem 0 1.2rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--blue);
+  display: inline-block;
+}
+h1::before {
+  content: '';
+  display: block;
+  height: 0;
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--navy-light);
+  margin: 2rem 0 1rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin: 1.5rem 0 0.8rem;
+}
+
+p {
+  margin: 0.6rem 0;
+  color: var(--gray-600);
+  font-size: 0.95rem;
+}
+
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Lists */
+ul, ol {
+  margin: 0.8rem 0;
+  padding-left: 1.5rem;
+}
+li {
+  margin: 0.4rem 0;
+  color: var(--gray-600);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+li strong {
+  color: var(--gray-800);
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: white;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+th {
+  background: var(--navy);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  white-space: nowrap;
+}
+td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--gray-200);
+  vertical-align: top;
+}
+tr:nth-child(even) td {
+  background: var(--gray-50);
+}
+tr:last-child td {
+  border-bottom: none;
+}
+tr:hover td {
+  background: var(--blue-light);
+}
+td strong {
+  color: var(--navy);
+}
+
+/* Callout */
+.callout {
+  display: flex;
+  gap: 0.8rem;
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius);
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border-left: 4px solid;
+}
+.callout-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.callout-text {
+  flex: 1;
+  color: var(--gray-800);
+}
+.callout-blue {
+  background: #eff6ff;
+  border-color: var(--blue);
+}
+.callout-yellow {
+  background: #fffbeb;
+  border-color: var(--yellow);
+}
+.callout-gray {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+.callout-green {
+  background: #f0fdf4;
+  border-color: var(--green);
+}
+
+/* Bookmark */
+.bookmark {
+  display: block;
+  padding: 0.8rem 1.2rem;
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  margin: 0.8rem 0;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+.bookmark:hover {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-lg);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 4px solid var(--gray-300);
+  padding: 0.8rem 1.2rem;
+  margin: 1rem 0;
+  background: var(--gray-100);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--gray-600);
+  font-style: italic;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: var(--gray-200);
+  margin: 2rem 0;
+}
+
+/* Footer */
+.site-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.85rem;
+}
+.site-footer strong {
+  color: rgba(255,255,255,0.9);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-title { font-size: 1.5rem; }
+  .site-header { padding: 2rem 1.5rem; }
+  .main { padding: 0 1rem 2rem; }
+  h1 { font-size: 1.3rem; }
+  table { font-size: 0.8rem; }
+  th, td { padding: 0.5rem 0.7rem; }
+  .site-nav a { padding: 0.7rem 0.9rem; font-size: 0.8rem; }
+}
+
+@media print {
+  .site-nav { display: none; }
+  .site-header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .main { max-width: 100%; }
+  .table-wrap { box-shadow: none; border: 1px solid var(--gray-200); }
+}
+
+html { scroll-behavior: smooth; }
+</style>
 </head>
 <body>
 
-  <!-- ===== NAVIGATION ===== -->
-  <header class="navbar" id="navbar">
-    <div class="navbar__inner">
-      <a href="index.html" class="navbar__logo">
-        <span class="navbar__logo-main">KACA</span>
-        <span class="navbar__logo-sub">한국아트크래프트협회</span>
-      </a>
-      <nav class="navbar__menu" id="navMenu">
-        <a href="index.html" class="active">홈</a>
-        <a href="about.html">협회 소개</a>
-        <a href="exhibitions.html">전시 안내</a>
-        <a href="education.html">교육 프로그램</a>
-        <a href="contact.html">문의하기</a>
-      </nav>
-      <button class="navbar__toggle" id="navToggle" aria-label="메뉴 열기">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
+<header class="site-header">
+  <div class="header-logo">WOOKVAN</div>
+  <h1 class="header-title">한국아트크래프트협회 홈페이지 제작 제안서 (고객 공유용)</h1>
+  <p class="header-sub">한국아트크래프트협회 · KACA</p>
+</header>
 
-  <main>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="#section-0">프로젝트 개요</a><a href="#section-1">기술 구성</a><a href="#section-2">홈페이지 구성 (7페이…</a><a href="#section-3">참고 사이트 분석</a><a href="#section-4">패키지 안내</a><a href="#section-5">진행 프로세스</a><a href="#section-6">협회에서 준비해주실 사…</a><a href="#section-7">문의</a>
+  </div>
+</nav>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero__content">
-          <span class="hero__label">Korea Art Craft Association</span>
-          <h1 class="hero__title">한국아트크래프트협회</h1>
-          <span class="hero__title-en">예술과 공예로 잇는 우리의 이야기</span>
-          <p class="hero__desc">
-            KACA는 예술 공예의 가치를 발굴하고 전문가와 애호가를 연결하는
-            국내 대표 아트크래프트 전문 단체입니다.<br />
-            전시, 교육, 자격증 과정을 통해 더 많은 분들과 함께합니다.
-          </p>
-          <div class="hero__actions">
-            <a href="about.html" class="btn btn--primary">협회 소개 보기</a>
-            <a href="contact.html" class="btn btn--outline">문의하기</a>
-          </div>
-        </div>
-      </div>
-    </section>
+<main class="main">
+<blockquote><strong>한국아트크래프트협회(KACA) 공식 홈페이지 구축 제안서</strong></blockquote>
+</section><section id="section-0"><h1><strong>프로젝트 개요</strong></h1>
+<p>한국아트크래프트협회의 공식 홈페이지를 구축하여, 협회 활동과 교육 프로그램을 온라인으로 안내하고 회원 및 잠재 수강생에게 전문적인 이미지를 전달합니다.</p>
+<div class="callout callout-yellow"><span class="callout-icon">💡</span><div class="callout-text"><strong>Notion에서 직접 콘텐츠를 수정하면 홈페이지에 자동 반영됩니다.</strong> 별도 개발 요청 없이 협회에서 직접 관리할 수 있습니다.</div></div>
+</section><section id="section-1"><h1><strong>기술 구성</strong></h1>
+<p>안정적이고 검증된 기술 스택을 사용합니다.</p>
+<div class="table-wrap"><table><tr class="header-row"><th><strong>구성</strong></th><th><strong>역할</strong></th><th><strong>설명</strong></th><th><strong>비용</strong></th></tr><tr><td>Notion</td><td>콘텐츠 관리(CMS)</td><td>협회에서 직접 텍스트·이미지 수정</td><td>무료</td></tr><tr><td>Next.js</td><td>웹사이트 엔진</td><td>React 기반 고성능 웹 프레임워크</td><td>무료(오픈소스)</td></tr><tr><td>Vercel</td><td>호스팅·배포</td><td>Next.js 공식 호스팅, 자동 배포</td><td>무료(기본)</td></tr><tr><td>n8n</td><td>자동화</td><td>Notion 변경 감지 → 자동 빌드·배포</td><td>기존 운영 중</td></tr><tr><td>가비아</td><td>도메인</td><td><a href="http://kaca.or.kr/" target="_blank">kaca.or.kr</a> 연결</td><td>연 2만원</td></tr></table></div>
+<div class="callout callout-green"><span class="callout-icon">✅</span><div class="callout-text"><strong>월 유지보수: 기본 8만원/월 / 표준 12만원/월 / 프리미엄 20만원/월 (인프라 포함). 인프라 비용: 도메인만 연 약 2만원.</strong></div></div>
+</section><section id="section-2"><h1><strong>홈페이지 구성 (7페이지)</strong></h1>
+<div class="table-wrap"><table><tr class="header-row"><th><strong>페이지</strong></th><th><strong>내용</strong></th><th><strong>상태</strong></th></tr><tr><td>메인(홈)</td><td>협회 소개, 주요 활동 요약, 통계, CTA</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>협회소개</td><td>비전, 연혁, 임원 소개, 핵심 가치</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>교육과정</td><td>기초·심화·전문가 과정, 원데이클래스</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>자격증 안내</td><td>자격증 종류, 취득 절차, 응시 안내</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>전시회·갤러리</td><td>전시 일정, 작품 갤러리</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>교육처 안내</td><td>전국 교육처 위치, 수강 안내</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>문의하기</td><td>연락처, 입회·교육 문의</td><td><span style="color:#22c55e">샘플 완료</span></td></tr></table></div>
+<a href="https://kaca-homepage.vercel.app/" target="_blank" class="bookmark">https://kaca-homepage.vercel.app/</a>
+<p>↑ 샘플 사이트 (클릭하여 확인)</p>
+</section><section id="section-3"><h1><strong>참고 사이트 분석</strong></h1>
+<div class="callout callout-gray"><span class="callout-icon">📌</span><div class="callout-text">각 패키지별로 참고할 수 있는 국내·해외 사이트를 정리했습니다. 해당 사이트 수준의 홈페이지를 구현해드립니다.</div></div>
+<h3>Basic (80만원) — 심플한 협회 소개</h3>
+<div class="table-wrap"><table><tr class="header-row"><th><strong>사이트</strong></th><th><strong>국가</strong></th><th><strong>주요 특징</strong></th><th><strong>참고 포인트</strong></th></tr><tr><td><a href="https://www.craftkorea.org/" target="_blank">한국공예가협회</a></td><td>🇰🇷 국내</td><td>1973년 설립, 전시 안내, 자격증</td><td>깔끔한 협회 소개 + 전시 구성</td></tr></table></div>
+<h3>Standard (120만원) — KRCA 동급 수준 ⭐ 추천</h3>
+<div class="table-wrap"><table><tr class="header-row"><th><strong>사이트</strong></th><th><strong>국가</strong></th><th><strong>주요 특징</strong></th><th><strong>참고 포인트</strong></th></tr><tr><td><a href="http://krca-resin.com/" target="_blank"><strong>한국레진공예협회 (KRCA)</strong></a></td><td>🇰🇷 국내</td><td>자격증, 교육과정, 포트폴리오, 쇼핑몰</td><td><strong>가장 직접적인 비교 대상 — 이 수준 이상 구현</strong></td></tr><tr><td><a href="https://hawaiifluidart.com/" target="_blank">Hawaii Fluid Art</a></td><td>🇺🇸 미국</td><td>플루이드아트 스튜디오 체인, 클래스 예약</td><td>모던 디자인 + 클래스/이벤트 안내</td></tr><tr><td><a href="https://www.rac-resin.com/" target="_blank">일본레진아트협회 (RAC)</a></td><td>🇯🇵 일본</td><td>강사 인증, 체험 강좌, 교육처 맵</td><td>자격증/강사 인증 체계 참고</td></tr></table></div>
+<h3>Premium (200만원~) — 글로벌 협회 수준</h3>
+<div class="table-wrap"><table><tr class="header-row"><th><strong>사이트</strong></th><th><strong>국가</strong></th><th><strong>주요 특징</strong></th><th><strong>참고 포인트</strong></th></tr><tr><td><a href="https://www.kcdf.or.kr/" target="_blank">한국공예디자인문화진흥원 (KCDF)</a></td><td>🇰🇷 국내</td><td>문체부 산하, 갤러리, 20+ 페이지</td><td>정부기관급 체계적 구조</td></tr><tr><td><a href="http://kfaa.or.kr/" target="_blank">한국미술협회</a></td><td>🇰🇷 국내</td><td>작가 DB, 전시, 공모전, 회원시스템</td><td>작가 DB + 공모전 접수</td></tr><tr><td><a href="https://craftcouncil.org/" target="_blank">American Craft Council</a></td><td>🇺🇸 미국</td><td>회원 멤버십, 매거진, 아트페어</td><td>회원시스템 + 콘텐츠 매거진</td></tr><tr><td><a href="https://www.sobyartacademy.com/" target="_blank">Soby Art Academy</a></td><td>🇨🇦 캐나다</td><td>온라인 강좌, LMS, 강좌 결제</td><td>온라인 교육 + 결제 시스템</td></tr></table></div>
+<hr>
+<div class="callout callout-blue"><span class="callout-icon">💡</span><div class="callout-text"><strong>Standard 패키지</strong>를 추천드립니다. 한국레진공예협회(KRCA) 수준 이상의 홈페이지를 더 빠르고 현대적인 기술(Notion+Next.js+Vercel)로 구현하여, 관리도 쉽고 확장성도 뛰어납니다.</div></div>
+</section><section id="section-4"><h1><strong>패키지 안내</strong></h1>
+<div class="table-wrap"><table><tr class="header-row"><th><strong>항목</strong></th><th><strong>Basic (80만원)</strong></th><th><strong>Standard (120만원)</strong></th><th><strong>Premium (200만원~)</strong></th></tr><tr><td>페이지 수</td><td>5페이지</td><td>7페이지 + 갤러리/공지</td><td>10+ 페이지 (회원전용 포함)</td></tr><tr><td>디자인</td><td>오픈소스 심플 템플릿</td><td>디자인 퀄리티 업 (애니메이션)</td><td>풀커스텀 디자인 + 브랜딩</td></tr><tr><td>Notion CMS</td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>자동 배포 (Vercel)</td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>도메인 연결</td><td><span style="color:#22c55e">✅ </span><a href="http://kaca.or.kr/" target="_blank"><span style="color:#22c55e">kaca.or.kr</span></a></td><td><span style="color:#22c55e">✅ </span><a href="http://kaca.or.kr/" target="_blank"><span style="color:#22c55e">kaca.or.kr</span></a></td><td><span style="color:#22c55e">✅ </span><a href="http://kaca.or.kr/" target="_blank"><span style="color:#22c55e">kaca.or.kr</span></a></td></tr><tr><td>반응형 (모바일)</td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>SEO 최적화</td><td>기본</td><td>기본 + Analytics</td><td>고급 + Analytics + 구조화</td></tr><tr><td>검색/필터 기능</td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>온라인 스토어</td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>회원 로그인/신청폼</td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>다국어 (한/영)</td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>n8n 자동화</td><td>기본 (배포)</td><td>Band 동기화 포함</td><td>맞춤 WF 구축</td></tr><tr><td>1개월 무상 유지보수</td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td><strong>구축 비용</strong></td><td><strong>80만원 (부가세 별도)</strong></td><td><strong>120만원 (부가세 별도)</strong></td><td><strong>200만원~ (부가세 별도)</strong></td></tr><tr><td><strong>월 유지보수</strong></td><td><strong>8만원/월 (인프라 포함)</strong></td><td><strong>12만원/월 (인프라 포함)</strong></td><td><strong>20만원/월 (인프라 포함)</strong></td></tr></table></div>
+<h2>월 유지보수 안내</h2>
+<div class="callout callout-blue"><span class="callout-icon">💡</span><div class="callout-text">월 유지보수비에는 호스팅, 도메인, 보안 관리가 모두 포함되어 있습니다. 별도로 관리하실 필요 없이, 매월 유지보수비만 납부하시면 홈페이지 운영에 필요한 모든 것이 관리가 가능합니다.</div></div>
+<h3>🖥️ 인프라 관리 (모든 패키지 공통)</h3>
+<ul>
+<li><strong>호스팅 운영</strong> — Vercel 서버에서 홈페이지가 항상 정상 작동하도록 관리합니다</li>
+<li><strong>도메인 관리</strong> — kaca.or.kr 도메인 연결 및 갱신을 대행합니다</li>
+<li><strong>SSL 보안 인증서</strong> — HTTPS 보안 연결을 자동으로 유지합니다</li>
+<li><strong>보안 업데이트</strong> — 웹사이트 프레임워크의 보안 패치를 정기적으로 적용합니다</li>
+<li><strong>자동 배포</strong> — Notion에서 내용을 수정하면 홈페이지에 자동으로 반영됩니다</li>
+</ul>
+<h3>🛠️ 기술 지원</h3>
+<ul>
+<li><strong>버그 및 오류 수정</strong> — 홈페이지에 문제가 생기면 신속하게 해결합니다</li>
+<li><strong>콘텐츠 수정 도움</strong> — Notion 사용이 어려우시면 저희가 대신 수정해드립니다</li>
+<li><strong>사용법 안내</strong> — 카카오톡 또는 전화로 Notion CMS 사용법을 안내드립니다</li>
+</ul>
+<h3>📊 패키지별 추가 혜택</h3>
+<div class="table-wrap"><table><tr class="header-row"><th><strong>서비스</strong></th><th><strong>Basic</strong></th><th><strong>Standard</strong></th><th><strong>Premium</strong></th></tr><tr><td>콘텐츠 수정 지원</td><td>월 2회</td><td>월 4회</td><td>무제한</td></tr><tr><td>장애 대응 시간</td><td>영업일 48시간 이내</td><td>영업일 24시간 이내</td><td>12시간 이내 (주말 포함)</td></tr><tr><td>방문자 분석 리포트</td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#22c55e">✅ 월간 리포트</span></td><td><span style="color:#22c55e">✅ 월간 리포트 + 개선 제안</span></td></tr><tr><td>성능 점검</td><td>요청 시</td><td>분기 1회</td><td>월 1회</td></tr></table></div>
+<hr>
+<div class="callout callout-yellow"><span class="callout-icon">✨</span><div class="callout-text"><strong>TIP: </strong>처음 1개월은 무상 유지보수 기간입니다. 이 기간 동안 사용법을 충분히 익히신 후, 유지보수 계약 여부를 결정하실 수 있습니다.</div></div>
+</section><section id="section-5"><h1><strong>진행 프로세스</strong></h1>
+<ol>
+<li><strong>협의</strong> — 요구사항 확인, 디자인 방향 결정</li>
+<li><strong>Notion 콘텐츠 구성</strong> — 협회 제공 텍스트·이미지로 페이지 구성</li>
+<li><strong>디자인·개발</strong> — Next.js 기반 홈페이지 제작</li>
+<li><strong>검수·수정</strong> — 피드백 반영, 최종 확인</li>
+<li><strong>배포·도메인 연결</strong> — Vercel 배포 + kaca.or.kr 연결</li>
+<li><strong>운영 교육</strong> — Notion에서 콘텐츠 수정하는 방법 안내</li>
+</ol>
+</section><section id="section-6"><h1><strong>협회에서 준비해주실 사항</strong></h1>
+<ul>
+<li>협회 로고 파일 (고화질)</li>
+<li>각 페이지에 들어갈 텍스트 내용</li>
+<li>전시회·작품 이미지 (고화질)</li>
+<li>임원진 사진 및 소개 (선택)</li>
+<li>kaca.or.kr 도메인 관리 정보 (가비아 로그인)</li>
+</ul>
+</section><section id="section-7"><h1><strong>문의</strong></h1>
+<p>검토해보시고, 프로젝트에 대한 문의사항이 있으시면 연락해 주세요.</p>
+<p>감사합니다.</p>
+<hr>
+<p><em>© 2026 WOOKVAN. 본 제안서는 한국아트크래프트협회를 위해 작성되었습니다.</em></p>
+</section>
+</main>
 
-    <!-- ===== STATS STRIP ===== -->
-    <div class="stats-strip">
-      <div class="container">
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="stat-item__number">1,200+</div>
-            <div class="stat-item__label">정회원</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-item__number">85+</div>
-            <div class="stat-item__label">전시 개최</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-item__number">40+</div>
-            <div class="stat-item__label">교육 프로그램</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-item__number">2024</div>
-            <div class="stat-item__label">설립 연도</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== INTRO / FEATURE CARDS ===== -->
-    <section class="section">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label">What We Do</span>
-          <h2>예술 공예의 새로운 기준을 만들어 갑니다</h2>
-          <p>전통 공예의 가치를 현대적 감각으로 재해석하고, 국내외 예술가 및 공예가를 지원합니다.</p>
-        </div>
-        <div class="card-grid card-grid--3">
-
-          <div class="feature-card">
-            <div class="feature-card__icon">🎨</div>
-            <h3 class="feature-card__title">전시 안내</h3>
-            <p class="feature-card__desc">
-              정기 전시 및 특별 기획전을 통해 회원 작가들의 작품을 선보입니다.
-              국내외 공예 트렌드를 반영한 다채로운 전시를 경험하세요.
-            </p>
-            <a href="exhibitions.html" class="card__link">전시 보러가기</a>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-card__icon">📚</div>
-            <h3 class="feature-card__title">교육 프로그램</h3>
-            <p class="feature-card__desc">
-              입문부터 전문가 과정까지 체계적인 커리큘럼으로 구성된 교육 프로그램을 운영합니다.
-              온라인·오프라인 혼합 수업을 제공합니다.
-            </p>
-            <a href="education.html" class="card__link">프로그램 보기</a>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-card__icon">🏅</div>
-            <h3 class="feature-card__title">자격증 안내</h3>
-            <p class="feature-card__desc">
-              KACA 공인 자격증 취득을 통해 전문성을 인정받으세요. 협회 인증 자격증은
-              국내 주요 기관 및 교육 기관에서 활용됩니다.
-            </p>
-            <a href="education.html#certification" class="card__link">자격증 알아보기</a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== LATEST NEWS ===== -->
-    <section class="section section--gray">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label">Latest News</span>
-          <h2>최신 소식</h2>
-          <p>한국아트크래프트협회의 최신 행사 및 공지사항을 확인하세요.</p>
-        </div>
-
-        <div class="news-list">
-          <div class="news-item">
-            <div class="news-item__date">2026.02.20</div>
-            <span class="news-item__badge">공지</span>
-            <div class="news-item__body">
-              <div class="news-item__title">
-                <a href="#">2026 상반기 정기 전시회 개최 안내</a>
-              </div>
-              <div class="news-item__summary">오는 3월 15일부터 4월 10일까지 서울 갤러리에서 정기 전시회가 열립니다. 회원 작가 32명의 신작이 공개됩니다.</div>
-            </div>
-          </div>
-
-          <div class="news-item">
-            <div class="news-item__date">2026.02.10</div>
-            <span class="news-item__badge">교육</span>
-            <div class="news-item__body">
-              <div class="news-item__title">
-                <a href="#">2026 봄학기 교육 프로그램 수강 신청 개시</a>
-              </div>
-              <div class="news-item__summary">세라믹 아트, 섬유 공예, 목공 입문 등 7개 과정의 봄학기 수강 신청이 시작되었습니다. 선착순 마감이오니 서두르세요.</div>
-            </div>
-          </div>
-
-          <div class="news-item">
-            <div class="news-item__date">2026.01.28</div>
-            <span class="news-item__badge">협회</span>
-            <div class="news-item__body">
-              <div class="news-item__title">
-                <a href="#">2026년 정기총회 개최 및 신임 임원 선출 결과</a>
-              </div>
-              <div class="news-item__summary">2026년 정기총회에서 신임 이사진이 선출되었습니다. 새로운 집행부와 함께 협회의 발전을 위해 최선을 다하겠습니다.</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="text-align:center; margin-top: 32px;">
-          <a href="#" class="btn btn--outline-dark">공지사항 더 보기</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CTA BANNER ===== -->
-    <section class="section" style="background: linear-gradient(135deg, #0a1628 0%, #0f2248 100%); text-align: center;">
-      <div class="container">
-        <span class="section-label" style="color:#93c5fd;">Join KACA</span>
-        <h2 style="color:#fff; margin-bottom: 16px;">지금 바로 협회에 참여하세요</h2>
-        <p style="color:rgba(255,255,255,0.65); max-width: 460px; margin: 0 auto 32px;">
-          한국아트크래프트협회는 예술과 공예를 사랑하는 모든 분들을 환영합니다.
-          전시, 교육, 네트워킹 혜택을 함께 누리세요.
-        </p>
-        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-          <a href="contact.html" class="btn btn--primary">회원 가입 문의</a>
-          <a href="about.html" class="btn btn--outline">협회 알아보기</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__top">
-        <div>
-          <div class="footer__brand-name">한국아트크래프트협회</div>
-          <div class="footer__brand-en">KOREA ART CRAFT ASSOCIATION</div>
-          <p class="footer__brand-desc">예술 공예의 가치를 발굴하고 전문가와 애호가를 연결하는 국내 대표 아트크래프트 전문 단체입니다.</p>
-        </div>
-        <div>
-          <div class="footer__col-title">Quick Links</div>
-          <div class="footer__links">
-            <a href="index.html">홈</a>
-            <a href="about.html">협회 소개</a>
-            <a href="exhibitions.html">전시 안내</a>
-            <a href="education.html">교육 프로그램</a>
-            <a href="contact.html">문의하기</a>
-          </div>
-        </div>
-        <div>
-          <div class="footer__col-title">Contact</div>
-          <div class="footer__contact-list">
-            <div class="footer__contact-item"><span>TEL</span><span>02-0000-0000</span></div>
-            <div class="footer__contact-item"><span>EMAIL</span><span>info@kaca.or.kr</span></div>
-            <div class="footer__contact-item"><span>주소</span><span>서울특별시 종로구 인사동길 00</span></div>
-            <div class="footer__contact-item"><span>운영</span><span>평일 09:00 – 18:00</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <span class="footer__copy">© 2026 한국아트크래프트협회. All rights reserved.</span>
-        <span class="footer__powered">Powered by <a href="#">WOOKVAN</a></span>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    const toggle = document.getElementById('navToggle');
-    const navbar = document.getElementById('navbar');
-    toggle.addEventListener('click', () => {
-      navbar.classList.toggle('navbar--open');
-    });
-  </script>
+<footer class="site-footer">
+  <p>&copy; 2026 <strong>WOOKVAN</strong>. 본 제안서는 한국아트크래프트협회를 위해 작성되었습니다.</p>
+</footer>
 
 </body>
 </html>
