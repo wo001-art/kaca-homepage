@@ -125,7 +125,11 @@ def block_to_html(block, depth=0):
     elif btype == "callout":
         text = rich_text_to_html(bdata.get("rich_text", []))
         icon = bdata.get("icon", {}).get("emoji", "💡")
-        return f'<div class="callout"><span class="callout-icon">{icon}</span><div class="callout-text">{text}</div></div>'
+        children_html = ""
+        if block.get("has_children"):
+            children = get_children(block["id"])
+            children_html = "".join(block_to_html(c, depth+1) for c in children)
+        return f'<div class="callout"><span class="callout-icon">{icon}</span><div class="callout-text">{text}{children_html}</div></div>'
 
     elif btype == "divider":
         return '<hr class="notion-divider">'
