@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   color: rgb(55,53,47);
   line-height: 1.7;
   background: white;
@@ -9,7 +9,7 @@ body {
 }
 
 .page {
-  max-width: 720px;
+  max-width: 860px;
   margin: 0 auto;
   padding: 2rem 4rem 4rem;
 }
@@ -39,17 +39,47 @@ body {
   text-align: center;
 }
 
-section { padding-top: 0.5rem; }
+section {
+  padding: 1.5rem;
+  margin: 1.5rem -1.5rem;
+  border-radius: 8px;
+}
 
 h1 {
   font-size: 1.875rem;
   font-weight: 700;
   color: rgb(55,53,47);
-  margin: 2.5rem 0 0.5rem;
+  margin: 0 0 0.8rem;
   line-height: 1.3;
-  padding-top: 2rem;
-  border-top: 1px solid rgb(233,233,231);
+  text-align: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid currentColor;
 }
+
+/* Section colors */
+.section-blue { background: rgb(235,245,255); }
+.section-blue h1 { color: rgb(30,100,200); border-color: rgb(30,100,200); }
+
+.section-green { background: rgb(235,250,240); }
+.section-green h1 { color: rgb(22,130,80); border-color: rgb(22,130,80); }
+
+.section-purple { background: rgb(245,240,255); }
+.section-purple h1 { color: rgb(110,60,190); border-color: rgb(110,60,190); }
+
+.section-orange { background: rgb(255,245,235); }
+.section-orange h1 { color: rgb(200,100,20); border-color: rgb(200,100,20); }
+
+.section-teal { background: rgb(235,250,250); }
+.section-teal h1 { color: rgb(20,130,140); border-color: rgb(20,130,140); }
+
+.section-pink { background: rgb(255,240,245); }
+.section-pink h1 { color: rgb(190,50,100); border-color: rgb(190,50,100); }
+
+.section-indigo { background: rgb(240,240,255); }
+.section-indigo h1 { color: rgb(70,60,180); border-color: rgb(70,60,180); }
+
+.section-amber { background: rgb(255,250,235); }
+.section-amber h1 { color: rgb(170,120,10); border-color: rgb(170,120,10); }
 
 h2 {
   font-size: 1.5rem;
@@ -107,14 +137,15 @@ th {
   background: rgb(247,246,243);
   color: rgb(55,53,47);
   font-weight: 600;
-  padding: 0.5rem 0.75rem;
+  padding: 0.6rem 1rem;
   text-align: left;
   border: 1px solid rgb(233,233,231);
   font-size: 0.875rem;
   word-break: keep-all;
+  white-space: nowrap;
 }
 td {
-  padding: 0.5rem 0.75rem;
+  padding: 0.6rem 1rem;
   border: 1px solid rgb(233,233,231);
   vertical-align: top;
   color: rgb(55,53,47);
@@ -192,6 +223,7 @@ code {
   .page { padding: 1.5rem 1.25rem 3rem; }
   .page-title { font-size: 1.5rem; }
   h1 { font-size: 1.5rem; }
+  section { margin: 1rem -0.5rem; padding: 1rem; }
   table { font-size: 0.8rem; }
   th, td { padding: 0.4rem 0.5rem; }
 }

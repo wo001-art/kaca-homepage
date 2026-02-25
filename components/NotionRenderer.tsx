@@ -108,10 +108,22 @@ function getEmoji(text: string): string {
   return ''
 }
 
+const sectionColors = [
+  'section-blue',
+  'section-green',
+  'section-purple',
+  'section-orange',
+  'section-teal',
+  'section-pink',
+  'section-indigo',
+  'section-amber',
+]
+
 export default function NotionRenderer({ blocks }: { blocks: Block[] }) {
   const elements: React.ReactNode[] = []
   let listItems: React.ReactNode[] = []
   let listType: 'ul' | 'ol' | null = null
+  let sectionIndex = -1
 
   function flushList() {
     if (listItems.length > 0 && listType) {
@@ -135,8 +147,10 @@ export default function NotionRenderer({ blocks }: { blocks: Block[] }) {
         const plain = rt.map((t: RichText) => t.plain_text).join('')
         const emoji = getEmoji(plain)
         const id = `section-${block.id}`
+        sectionIndex++
+        const colorClass = sectionColors[sectionIndex % sectionColors.length]
         elements.push(
-          <section key={block.id} id={id}>
+          <section key={block.id} id={id} className={colorClass}>
             <h1>{emoji}{renderRichText(rt)}</h1>
           </section>
         )
