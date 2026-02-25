@@ -261,12 +261,16 @@ body {
 
 /* === Navigation === */
 .navbar {
-    background: var(--primary);
+    background: rgba(26,26,46,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 0;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
 .nav-container {
     max-width: 1200px;
@@ -318,105 +322,144 @@ body {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, #0f3460 100%);
     color: white;
     text-align: center;
-    padding: 5rem 2rem;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6rem 2rem;
     position: relative;
     overflow: hidden;
 }
-.hero::before {
-    content: '';
+.hero-glow {
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(201,169,110,0.1) 0%, transparent 50%);
-    animation: pulse 8s ease-in-out infinite;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.2;
+    pointer-events: none;
 }
-@keyframes pulse {
-    0%,100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.1); opacity: 1; }
+.hero-glow-1 {
+    width: 400px; height: 400px;
+    background: var(--red);
+    top: 10%; left: 10%;
+    animation: float1 12s ease-in-out infinite;
+}
+.hero-glow-2 {
+    width: 350px; height: 350px;
+    background: var(--accent);
+    top: 30%; right: 10%;
+    animation: float2 10s ease-in-out infinite;
+}
+.hero-glow-3 {
+    width: 300px; height: 300px;
+    background: #533483;
+    bottom: 10%; left: 30%;
+    animation: float3 14s ease-in-out infinite;
+}
+@keyframes float1 {
+    0%,100% { transform: translate(0,0); }
+    50% { transform: translate(30px,-20px); }
+}
+@keyframes float2 {
+    0%,100% { transform: translate(0,0); }
+    50% { transform: translate(-20px,30px); }
+}
+@keyframes float3 {
+    0%,100% { transform: translate(0,0); }
+    50% { transform: translate(20px,20px); }
 }
 .hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 800;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     position: relative;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
 }
-.hero p {
-    font-size: 1.2rem;
+.hero .subtitle {
+    font-size: 1.3rem;
     opacity: 0.85;
     position: relative;
     max-width: 600px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
 }
 .hero-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 1.2rem;
     justify-content: center;
     position: relative;
 }
 .btn {
-    padding: 0.8rem 2rem;
-    border-radius: 4px;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
+    font-size: 1rem;
     transition: all 0.3s;
     display: inline-block;
 }
 .btn-primary {
     background: var(--accent);
     color: white;
+    box-shadow: 0 4px 15px rgba(201,169,110,0.3);
 }
-.btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(201,169,110,0.4); }
 .btn-outline {
-    border: 2px solid rgba(255,255,255,0.5);
+    border: 2px solid rgba(255,255,255,0.4);
     color: white;
 }
-.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
 
 /* === Content === */
 .content {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 3rem 2rem;
+    padding: 4rem 2rem 5rem;
 }
 .page-header {
     text-align: center;
-    padding: 3rem 2rem 1rem;
-    max-width: 1000px;
+    padding: 8rem 2rem 2rem;
+    max-width: 1100px;
     margin: 0 auto;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    margin-top: 0;
 }
 .page-header h1 {
-    font-size: 2.2rem;
-    color: var(--primary);
+    font-size: 2.5rem;
+    color: white;
     margin-bottom: 0.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
 }
 .page-header p {
-    color: var(--text-light);
+    color: rgba(255,255,255,0.7);
     font-size: 1.1rem;
 }
 
 /* === Notion Blocks === */
 .notion-h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: var(--primary);
-    margin: 2.5rem 0 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--accent);
+    margin: 3.5rem 0 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 3px solid var(--accent);
+    font-weight: 800;
 }
 .notion-h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: var(--primary);
-    margin: 2rem 0 0.8rem;
+    margin: 3rem 0 1rem;
+    font-weight: 700;
 }
 .notion-h3 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     color: var(--secondary);
-    margin: 1.5rem 0 0.5rem;
+    margin: 2rem 0 0.8rem;
+    font-weight: 600;
 }
-p { margin-bottom: 0.8rem; }
-.spacer { height: 0.5rem; }
+p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
+.spacer { height: 1rem; }
 
 .notion-list {
     margin: 0.5rem 0 1rem 1.5rem;
@@ -440,12 +483,12 @@ p { margin-bottom: 0.8rem; }
 .callout {
     display: flex;
     gap: 1rem;
-    padding: 1.2rem 1.5rem;
-    margin: 1rem 0;
-    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    border-radius: 16px;
     background: var(--white);
     border: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 .callout-icon { font-size: 1.3rem; flex-shrink: 0; }
 .callout-text { flex: 1; }
@@ -457,14 +500,16 @@ p { margin-bottom: 0.8rem; }
 }
 
 .notion-image {
-    margin: 1.5rem 0;
+    margin: 2rem 0;
     text-align: center;
 }
 .notion-image img {
     max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    transition: transform 0.3s;
 }
+.notion-image img:hover { transform: scale(1.02); }
 .notion-image figcaption {
     margin-top: 0.5rem;
     color: var(--text-light);
@@ -474,19 +519,35 @@ p { margin-bottom: 0.8rem; }
 /* === Columns === */
 .columns {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin: 1rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
 }
 .column {
     background: var(--white);
-    border-radius: 8px;
-    padding: 1.5rem;
+    border-radius: 16px;
+    padding: 2rem;
     border: 1px solid var(--border);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    transition: transform 0.2s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
 }
-.column:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.column:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+/* 다크 카드 (홀수번째 섹션용) */
+.content > .columns:nth-of-type(even) .column {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+}
+.content > .columns:nth-of-type(even) .column h3,
+.content > .columns:nth-of-type(even) .column .notion-h3 {
+    color: var(--accent);
+}
+.content > .columns:nth-of-type(even) .column p {
+    color: rgba(255,255,255,0.8);
+}
 
 /* === Table === */
 .table-wrapper {
@@ -502,7 +563,7 @@ p { margin-bottom: 0.8rem; }
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 .notion-table th, .notion-table td {
-    padding: 0.8rem 1rem;
+    padding: 1rem 1.2rem;
     border: 1px solid var(--border);
     text-align: left;
     font-size: 0.95rem;
@@ -511,6 +572,12 @@ p { margin-bottom: 0.8rem; }
     background: var(--primary);
     color: white;
     font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.notion-table tr:hover td {
+    background: rgba(201,169,110,0.05);
 }
 
 /* === Toggle === */
@@ -612,17 +679,22 @@ p { margin-bottom: 0.8rem; }
         top: 100%;
         left: 0;
         right: 0;
-        background: var(--primary);
+        background: rgba(26,26,46,0.98);
+        backdrop-filter: blur(12px);
         flex-direction: column;
         padding: 1rem;
     }
     .nav-menu.active { display: flex; }
     .nav-menu li a { padding: 0.8rem 1rem; }
-    .hero h1 { font-size: 2rem; }
-    .hero { padding: 3rem 1.5rem; }
+    .hero h1 { font-size: 2.2rem; letter-spacing: 2px; }
+    .hero { min-height: 70vh; padding: 5rem 1.5rem; }
+    .hero-glow { display: none; }
     .columns { grid-template-columns: 1fr; }
-    .content { padding: 2rem 1rem; }
+    .content { padding: 2rem 1rem 3rem; }
     .footer-content { grid-template-columns: 1fr; }
+    .page-header { padding: 6rem 1.5rem 1.5rem; }
+    .page-header h1 { font-size: 1.8rem; }
+    .notion-h1 { font-size: 1.7rem; }
 }
 """
 
@@ -665,8 +737,11 @@ def build_page(title, content_html, slug="", is_home=False):
     if is_home:
         hero = """
         <section class="hero">
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
+            <div class="hero-glow hero-glow-3"></div>
             <h1>한국아트크래프트협회</h1>
-            <p>마블플루이드아트의 아름다움을 세상에 전합니다</p>
+            <p class="subtitle">마블플루이드아트의 아름다움을 세상에 전합니다</p>
             <div class="hero-buttons">
                 <a href="exhibitions.html" class="btn btn-primary">전시회 보기</a>
                 <a href="education.html" class="btn btn-outline">교육 안내</a>
