@@ -25,14 +25,17 @@ body {
 .page-icon {
   font-size: 4rem;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .page-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: rgb(55,53,47);
   margin-bottom: 0.3rem;
-  line-height: 1.2;
+  line-height: 1.3;
+  text-align: center;
+  word-break: keep-all;
 }
 
 .page-meta {
@@ -41,35 +44,9 @@ body {
   margin-bottom: 2.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid rgb(233,233,231);
+  text-align: center;
 }
 
-/* TOC */
-.toc {
-  background: rgb(247,246,243);
-  border-radius: 4px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 2rem;
-}
-.toc-title {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: rgba(55,53,47,0.65);
-  margin-bottom: 0.5rem;
-}
-.toc a {
-  display: block;
-  font-size: 0.875rem;
-  color: rgba(55,53,47,0.65);
-  text-decoration: none;
-  padding: 0.2rem 0;
-  transition: color 0.15s;
-}
-.toc a:hover {
-  color: rgb(55,53,47);
-  background: rgba(55,53,47,0.04);
-  border-radius: 3px;
-  padding-left: 0.3rem;
-}
 
 section { padding-top: 0.5rem; }
 
@@ -79,6 +56,8 @@ h1 {
   color: rgb(55,53,47);
   margin: 2.5rem 0 0.5rem;
   line-height: 1.3;
+  padding-top: 2rem;
+  border-top: 1px solid rgb(233,233,231);
 }
 
 h2 {
@@ -180,20 +159,22 @@ tr:hover td {
 .callout-green { background: rgb(221,237,226); }
 
 /* Bookmark - Notion style */
-.bookmark {
-  display: block;
-  padding: 0.75rem 1rem;
-  background: white;
-  border: 1px solid rgb(233,233,231);
-  border-radius: 4px;
-  margin: 0.5rem 0;
-  font-size: 0.875rem;
-  color: rgb(55,53,47);
-  transition: background 0.15s;
+.sample-btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: rgb(35,131,226);
+  color: white !important;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(35,131,226,0.3);
 }
-.bookmark:hover {
-  background: rgb(247,246,243);
-  text-decoration: none;
+.sample-btn:hover {
+  background: rgb(0,105,204);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(35,131,226,0.4);
 }
 
 blockquote {
@@ -222,7 +203,7 @@ hr {
 
 @media (max-width: 768px) {
   .page { padding: 1.5rem 1.25rem 3rem; }
-  .page-title { font-size: 1.8rem; }
+  .page-title { font-size: 1.5rem; }
   h1 { font-size: 1.5rem; }
   table { font-size: 0.8rem; }
   th, td { padding: 0.4rem 0.5rem; }
@@ -243,24 +224,20 @@ html { scroll-behavior: smooth; }
   <h1 class="page-title">한국아트크래프트협회 홈페이지 제작 제안서 (고객 공유용)</h1>
   <div class="page-meta">WOOKVAN &middot; 2026년 2월</div>
 
-  <div class="toc">
-    <div class="toc-title">목차</div>
-    <a href="#section-0">프로젝트 개요</a><a href="#section-1">기술 구성</a><a href="#section-2">홈페이지 구성 (7페이…</a><a href="#section-3">참고 사이트 분석</a><a href="#section-4">패키지 안내</a><a href="#section-5">진행 프로세스</a><a href="#section-6">협회에서 준비해주실 사…</a><a href="#section-7">문의</a>
-  </div>
 
 <blockquote><strong>한국아트크래프트협회(KACA) 공식 홈페이지 구축 제안서</strong></blockquote>
-</section><section id="section-0"><h1><strong>프로젝트 개요</strong></h1>
+</section><section id="section-0"><h1>🎯 <strong>프로젝트 개요</strong></h1>
 <p>한국아트크래프트협회의 공식 홈페이지를 구축하여, 협회 활동과 교육 프로그램을 온라인으로 안내하고 회원 및 잠재 수강생에게 전문적인 이미지를 전달합니다.</p>
 <div class="callout callout-yellow"><span class="callout-icon">💡</span><div class="callout-text"><strong>Notion에서 직접 콘텐츠를 수정하면 홈페이지에 자동 반영됩니다.</strong> 별도 개발 요청 없이 협회에서 직접 관리할 수 있습니다.</div></div>
-</section><section id="section-1"><h1><strong>기술 구성</strong></h1>
+</section><section id="section-1"><h1>⚙️ <strong>기술 구성</strong></h1>
 <p>안정적이고 검증된 기술 스택을 사용합니다.</p>
 <div class="table-wrap"><table><tr class="header-row"><th><strong>구성</strong></th><th><strong>역할</strong></th><th><strong>설명</strong></th><th><strong>비용</strong></th></tr><tr><td>Notion</td><td>콘텐츠 관리(CMS)</td><td>협회에서 직접 텍스트·이미지 수정</td><td>무료</td></tr><tr><td>Next.js</td><td>웹사이트 엔진</td><td>React 기반 고성능 웹 프레임워크</td><td>무료(오픈소스)</td></tr><tr><td>Vercel</td><td>호스팅·배포</td><td>Next.js 공식 호스팅, 자동 배포</td><td>무료(기본)</td></tr><tr><td>n8n</td><td>자동화</td><td>Notion 변경 감지 → 자동 빌드·배포</td><td>기존 운영 중</td></tr><tr><td>가비아</td><td>도메인</td><td><a href="http://kaca.or.kr/" target="_blank">kaca.or.kr</a> 연결</td><td>연 2만원</td></tr></table></div>
 <div class="callout callout-green"><span class="callout-icon">✅</span><div class="callout-text"><strong>월 유지보수: 기본 8만원/월 / 표준 12만원/월 / 프리미엄 20만원/월 (인프라 포함). 인프라 비용: 도메인만 연 약 2만원.</strong></div></div>
-</section><section id="section-2"><h1><strong>홈페이지 구성 (7페이지)</strong></h1>
+</section><section id="section-2"><h1>🖥️ <strong>홈페이지 구성 (7페이지)</strong></h1>
 <div class="table-wrap"><table><tr class="header-row"><th><strong>페이지</strong></th><th><strong>내용</strong></th><th><strong>상태</strong></th></tr><tr><td>메인(홈)</td><td>협회 소개, 주요 활동 요약, 통계, CTA</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>협회소개</td><td>비전, 연혁, 임원 소개, 핵심 가치</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>교육과정</td><td>기초·심화·전문가 과정, 원데이클래스</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>자격증 안내</td><td>자격증 종류, 취득 절차, 응시 안내</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>전시회·갤러리</td><td>전시 일정, 작품 갤러리</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>교육처 안내</td><td>전국 교육처 위치, 수강 안내</td><td><span style="color:#22c55e">샘플 완료</span></td></tr><tr><td>문의하기</td><td>연락처, 입회·교육 문의</td><td><span style="color:#22c55e">샘플 완료</span></td></tr></table></div>
-<a href="https://kaca-homepage.vercel.app/" target="_blank" class="bookmark">https://kaca-homepage.vercel.app/</a>
+<div style="text-align:center;margin:1.5rem 0"><a href="https://kaca-homepage.vercel.app/" target="_blank" class="sample-btn">🌐 샘플 사이트 보기</a></div>
 <p>↑ 샘플 사이트 (클릭하여 확인)</p>
-</section><section id="section-3"><h1><strong>참고 사이트 분석</strong></h1>
+</section><section id="section-3"><h1>🔍 <strong>참고 사이트 분석</strong></h1>
 <div class="callout callout-gray"><span class="callout-icon">📌</span><div class="callout-text">각 패키지별로 참고할 수 있는 국내·해외 사이트를 정리했습니다. 해당 사이트 수준의 홈페이지를 구현해드립니다.</div></div>
 <h3>Basic (80만원) — 심플한 협회 소개</h3>
 <div class="table-wrap"><table><tr class="header-row"><th><strong>사이트</strong></th><th><strong>국가</strong></th><th><strong>주요 특징</strong></th><th><strong>참고 포인트</strong></th></tr><tr><td><a href="https://www.craftkorea.org/" target="_blank">한국공예가협회</a></td><td>🇰🇷 국내</td><td>1973년 설립, 전시 안내, 자격증</td><td>깔끔한 협회 소개 + 전시 구성</td></tr></table></div>
@@ -270,7 +247,7 @@ html { scroll-behavior: smooth; }
 <div class="table-wrap"><table><tr class="header-row"><th><strong>사이트</strong></th><th><strong>국가</strong></th><th><strong>주요 특징</strong></th><th><strong>참고 포인트</strong></th></tr><tr><td><a href="https://www.kcdf.or.kr/" target="_blank">한국공예디자인문화진흥원 (KCDF)</a></td><td>🇰🇷 국내</td><td>문체부 산하, 갤러리, 20+ 페이지</td><td>정부기관급 체계적 구조</td></tr><tr><td><a href="http://kfaa.or.kr/" target="_blank">한국미술협회</a></td><td>🇰🇷 국내</td><td>작가 DB, 전시, 공모전, 회원시스템</td><td>작가 DB + 공모전 접수</td></tr><tr><td><a href="https://craftcouncil.org/" target="_blank">American Craft Council</a></td><td>🇺🇸 미국</td><td>회원 멤버십, 매거진, 아트페어</td><td>회원시스템 + 콘텐츠 매거진</td></tr><tr><td><a href="https://www.sobyartacademy.com/" target="_blank">Soby Art Academy</a></td><td>🇨🇦 캐나다</td><td>온라인 강좌, LMS, 강좌 결제</td><td>온라인 교육 + 결제 시스템</td></tr></table></div>
 <hr>
 <div class="callout callout-blue"><span class="callout-icon">💡</span><div class="callout-text"><strong>Standard 패키지</strong>를 추천드립니다. 한국레진공예협회(KRCA) 수준 이상의 홈페이지를 더 빠르고 현대적인 기술(Notion+Next.js+Vercel)로 구현하여, 관리도 쉽고 확장성도 뛰어납니다.</div></div>
-</section><section id="section-4"><h1><strong>패키지 안내</strong></h1>
+</section><section id="section-4"><h1>📦 <strong>패키지 안내</strong></h1>
 <div class="table-wrap"><table><tr class="header-row"><th><strong>항목</strong></th><th><strong>Basic (80만원)</strong></th><th><strong>Standard (120만원)</strong></th><th><strong>Premium (200만원~)</strong></th></tr><tr><td>페이지 수</td><td>5페이지</td><td>7페이지 + 갤러리/공지</td><td>10+ 페이지 (회원전용 포함)</td></tr><tr><td>디자인</td><td>오픈소스 심플 템플릿</td><td>디자인 퀄리티 업 (애니메이션)</td><td>풀커스텀 디자인 + 브랜딩</td></tr><tr><td>Notion CMS</td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>자동 배포 (Vercel)</td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>도메인 연결</td><td><span style="color:#22c55e">✅ </span><a href="http://kaca.or.kr/" target="_blank"><span style="color:#22c55e">kaca.or.kr</span></a></td><td><span style="color:#22c55e">✅ </span><a href="http://kaca.or.kr/" target="_blank"><span style="color:#22c55e">kaca.or.kr</span></a></td><td><span style="color:#22c55e">✅ </span><a href="http://kaca.or.kr/" target="_blank"><span style="color:#22c55e">kaca.or.kr</span></a></td></tr><tr><td>반응형 (모바일)</td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>SEO 최적화</td><td>기본</td><td>기본 + Analytics</td><td>고급 + Analytics + 구조화</td></tr><tr><td>검색/필터 기능</td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>온라인 스토어</td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>회원 로그인/신청폼</td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>다국어 (한/영)</td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td>n8n 자동화</td><td>기본 (배포)</td><td>Band 동기화 포함</td><td>맞춤 WF 구축</td></tr><tr><td>1개월 무상 유지보수</td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td><td><span style="color:#22c55e">✅</span></td></tr><tr><td><strong>구축 비용</strong></td><td><strong>80만원 (부가세 별도)</strong></td><td><strong>120만원 (부가세 별도)</strong></td><td><strong>200만원~ (부가세 별도)</strong></td></tr><tr><td><strong>월 유지보수</strong></td><td><strong>8만원/월 (인프라 포함)</strong></td><td><strong>12만원/월 (인프라 포함)</strong></td><td><strong>20만원/월 (인프라 포함)</strong></td></tr></table></div>
 <h2>월 유지보수 안내</h2>
 <div class="callout callout-blue"><span class="callout-icon">💡</span><div class="callout-text">월 유지보수비에는 호스팅, 도메인, 보안 관리가 모두 포함되어 있습니다. 별도로 관리하실 필요 없이, 매월 유지보수비만 납부하시면 홈페이지 운영에 필요한 모든 것이 관리가 가능합니다.</div></div>
@@ -292,7 +269,7 @@ html { scroll-behavior: smooth; }
 <div class="table-wrap"><table><tr class="header-row"><th><strong>서비스</strong></th><th><strong>Basic</strong></th><th><strong>Standard</strong></th><th><strong>Premium</strong></th></tr><tr><td>콘텐츠 수정 지원</td><td>월 2회</td><td>월 4회</td><td>무제한</td></tr><tr><td>장애 대응 시간</td><td>영업일 48시간 이내</td><td>영업일 24시간 이내</td><td>12시간 이내 (주말 포함)</td></tr><tr><td>방문자 분석 리포트</td><td><span style="color:#ef4444">❌</span></td><td><span style="color:#22c55e">✅ 월간 리포트</span></td><td><span style="color:#22c55e">✅ 월간 리포트 + 개선 제안</span></td></tr><tr><td>성능 점검</td><td>요청 시</td><td>분기 1회</td><td>월 1회</td></tr></table></div>
 <hr>
 <div class="callout callout-yellow"><span class="callout-icon">✨</span><div class="callout-text"><strong>TIP: </strong>처음 1개월은 무상 유지보수 기간입니다. 이 기간 동안 사용법을 충분히 익히신 후, 유지보수 계약 여부를 결정하실 수 있습니다.</div></div>
-</section><section id="section-5"><h1><strong>진행 프로세스</strong></h1>
+</section><section id="section-5"><h1>📋 <strong>진행 프로세스</strong></h1>
 <ol>
 <li><strong>협의</strong> — 요구사항 확인, 디자인 방향 결정</li>
 <li><strong>Notion 콘텐츠 구성</strong> — 협회 제공 텍스트·이미지로 페이지 구성</li>
@@ -301,7 +278,7 @@ html { scroll-behavior: smooth; }
 <li><strong>배포·도메인 연결</strong> — Vercel 배포 + kaca.or.kr 연결</li>
 <li><strong>운영 교육</strong> — Notion에서 콘텐츠 수정하는 방법 안내</li>
 </ol>
-</section><section id="section-6"><h1><strong>협회에서 준비해주실 사항</strong></h1>
+</section><section id="section-6"><h1>📝 <strong>협회에서 준비해주실 사항</strong></h1>
 <ul>
 <li>협회 로고 파일 (고화질)</li>
 <li>각 페이지에 들어갈 텍스트 내용</li>
@@ -309,7 +286,7 @@ html { scroll-behavior: smooth; }
 <li>임원진 사진 및 소개 (선택)</li>
 <li>kaca.or.kr 도메인 관리 정보 (가비아 로그인)</li>
 </ul>
-</section><section id="section-7"><h1><strong>문의</strong></h1>
+</section><section id="section-7"><h1>💬 <strong>문의</strong></h1>
 <p>검토해보시고, 프로젝트에 대한 문의사항이 있으시면 연락해 주세요.</p>
 <p>감사합니다.</p>
 <hr>
