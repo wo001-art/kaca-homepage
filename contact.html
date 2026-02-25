@@ -1,535 +1,295 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문의하기 - 한국아트크래프트협회 (KACA)</title>
-    <meta name="description" content="한국아트크래프트협회 - 마블플루이드아트, 레진아트, 크리스탈레진 전문 협회">
-    <!-- System font stack -->
-    <style>
-:root {
-    --primary: #1a1a2e;
-    --secondary: #16213e;
-    --accent: #c9a96e;
-    --accent-hover: #b8943f;
-    --text: #333;
-    --text-light: #666;
-    --bg: #f8f6f2;
-    --white: #fff;
-    --border: #e5e5e5;
-    --red: #e94560;
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-    font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-    color: var(--text);
-    background: var(--bg);
-    line-height: 1.7;
-}
-
-/* === Navigation === */
-.navbar {
-    background: rgba(26,26,46,0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-}
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-}
-.nav-logo {
-    color: var(--accent);
-    font-size: 1.5rem;
-    font-weight: 800;
-    text-decoration: none;
-    letter-spacing: 2px;
-    padding: 1rem 0;
-}
-.nav-menu {
-    list-style: none;
-    display: flex;
-    gap: 0;
-}
-.nav-menu li a {
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    padding: 1.2rem 1.2rem;
-    display: block;
-    font-size: 0.95rem;
-    transition: all 0.3s;
-    border-bottom: 3px solid transparent;
-}
-.nav-menu li a:hover,
-.nav-menu li a.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-    background: rgba(255,255,255,0.05);
-}
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-/* === Hero === */
-.hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, #0f3460 100%);
-    color: white;
-    text-align: center;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 6rem 2rem;
-    position: relative;
-    overflow: hidden;
-}
-.hero-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.2;
-    pointer-events: none;
-}
-.hero-glow-1 {
-    width: 400px; height: 400px;
-    background: var(--red);
-    top: 10%; left: 10%;
-    animation: float1 12s ease-in-out infinite;
-}
-.hero-glow-2 {
-    width: 350px; height: 350px;
-    background: var(--accent);
-    top: 30%; right: 10%;
-    animation: float2 10s ease-in-out infinite;
-}
-.hero-glow-3 {
-    width: 300px; height: 300px;
-    background: #533483;
-    bottom: 10%; left: 30%;
-    animation: float3 14s ease-in-out infinite;
-}
-@keyframes float1 {
-    0%,100% { transform: translate(0,0); }
-    50% { transform: translate(30px,-20px); }
-}
-@keyframes float2 {
-    0%,100% { transform: translate(0,0); }
-    50% { transform: translate(-20px,30px); }
-}
-@keyframes float3 {
-    0%,100% { transform: translate(0,0); }
-    50% { transform: translate(20px,20px); }
-}
-.hero h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 1.2rem;
-    position: relative;
-    letter-spacing: 4px;
-}
-.hero .subtitle {
-    font-size: 1.3rem;
-    opacity: 0.85;
-    position: relative;
-    max-width: 600px;
-    margin: 0 auto 2.5rem;
-    line-height: 1.8;
-}
-.hero-buttons {
-    display: flex;
-    gap: 1.2rem;
-    justify-content: center;
-    position: relative;
-}
-.btn {
-    padding: 1rem 2.5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s;
-    display: inline-block;
-}
-.btn-primary {
-    background: var(--accent);
-    color: white;
-    box-shadow: 0 4px 15px rgba(201,169,110,0.3);
-}
-.btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(201,169,110,0.4); }
-.btn-outline {
-    border: 2px solid rgba(255,255,255,0.4);
-    color: white;
-}
-.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
-
-/* === Content === */
-.content {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 2rem 5rem;
-}
-.page-header {
-    text-align: center;
-    padding: 8rem 2rem 3rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, #0f3460 100%);
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-.page-header::before {
-    content: '';
-    position: absolute;
-    top: -50%; right: -20%;
-    width: 400px; height: 400px;
-    background: var(--accent);
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.1;
-    pointer-events: none;
-}
-.page-header h1 {
-    font-size: 2.5rem;
-    color: white;
-    margin-bottom: 0.5rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    position: relative;
-}
-.page-header p {
-    color: rgba(255,255,255,0.7);
-    font-size: 1.1rem;
-    position: relative;
-}
-
-/* === Notion Blocks === */
-.notion-h1 {
-    font-size: 2.2rem;
-    color: var(--primary);
-    margin: 3.5rem 0 1.5rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 3px solid var(--accent);
-    font-weight: 800;
-}
-.notion-h2 {
-    font-size: 1.6rem;
-    color: var(--primary);
-    margin: 3rem 0 1rem;
-    font-weight: 700;
-}
-.notion-h3 {
-    font-size: 1.25rem;
-    color: var(--secondary);
-    margin: 2rem 0 0.8rem;
-    font-weight: 600;
-}
-p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
-.spacer { height: 1rem; }
-
-.notion-list {
-    margin: 0.5rem 0 1rem 1.5rem;
-}
-.notion-list li {
-    margin-bottom: 0.4rem;
-}
-.notion-list .nested {
-    margin-top: 0.3rem;
-}
-
-.notion-quote {
-    border-left: 4px solid var(--accent);
-    padding: 1rem 1.5rem;
-    margin: 1rem 0;
-    background: rgba(201,169,110,0.08);
-    font-style: italic;
-    color: var(--text-light);
-}
-
-.callout {
-    display: flex;
-    gap: 1rem;
-    padding: 1.5rem 2rem;
-    margin: 1.5rem 0;
-    border-radius: 8px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    color: var(--text);
-}
-.callout-icon { font-size: 1.3rem; flex-shrink: 0; }
-.callout-text { flex: 1; color: var(--text); }
-
-.notion-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2rem 0;
-}
-
-.notion-image {
-    margin: 2rem 0;
-    text-align: center;
-}
-.notion-image img {
-    max-width: 100%;
-    max-height: 500px;
-    width: auto;
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    transition: transform 0.3s;
-}
-.notion-image img:hover { transform: scale(1.02); }
-.notion-image figcaption {
-    margin-top: 0.5rem;
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-/* 컬럼 내 이미지는 꽉 채움 */
-.column .notion-image img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-}
-
-/* === Columns === */
-.columns {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-.cols-2 { grid-template-columns: repeat(2, 1fr); }
-.cols-3 { grid-template-columns: repeat(3, 1fr); }
-.cols-4 { grid-template-columns: repeat(2, 1fr); }  /* 4는 2x2로 표시 */
-.column {
-    background: var(--white);
-    border-radius: 8px;
-    padding: 2rem;
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    transition: all 0.3s ease;
-}
-.column:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-/* 다크 카드 (홀수번째 섹션용) */
-.content > .columns:nth-of-type(even) .column {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    border: none;
-}
-.content > .columns:nth-of-type(even) .column h3,
-.content > .columns:nth-of-type(even) .column .notion-h3 {
-    color: var(--accent);
-}
-.content > .columns:nth-of-type(even) .column p {
-    color: rgba(255,255,255,0.8);
-}
-
-/* === Table === */
-.table-wrapper {
-    overflow-x: auto;
-    margin: 1rem 0;
-}
-.notion-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--white);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
-.notion-table th, .notion-table td {
-    padding: 1rem 1.2rem;
-    border: 1px solid var(--border);
-    text-align: left;
-    font-size: 0.95rem;
-}
-.notion-table th, .notion-table .table-header th {
-    background: var(--primary);
-    color: white;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.notion-table tr:hover td {
-    background: rgba(201,169,110,0.05);
-}
-
-/* === Toggle === */
-.notion-toggle {
-    margin: 0.5rem 0;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-}
-.notion-toggle summary {
-    padding: 1rem 1.5rem;
-    cursor: pointer;
-    font-weight: 600;
-    background: var(--white);
-    transition: background 0.2s;
-}
-.notion-toggle summary:hover { background: #f0f0f0; }
-.toggle-content {
-    padding: 1rem 1.5rem;
-    border-top: 1px solid var(--border);
-    background: #fafafa;
-}
-
-/* === Footer === */
-.footer {
-    background: var(--primary);
-    color: rgba(255,255,255,0.7);
-    padding: 3rem 2rem 1.5rem;
-    margin-top: 3rem;
-}
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-}
-.footer h3 {
-    color: var(--accent);
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-.footer a {
-    color: rgba(255,255,255,0.7);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-.footer a:hover { color: var(--accent); }
-.footer-bottom {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    font-size: 0.85rem;
-}
-.footer-bottom .tech {
-    color: rgba(255,255,255,0.4);
-    font-size: 0.8rem;
-    margin-top: 0.3rem;
-}
-
-/* === Bookmark === */
-.bookmark {
-    display: block;
-    padding: 1rem 1.5rem;
-    margin: 1rem 0;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    text-decoration: none;
-    color: var(--text);
-    background: var(--white);
-    transition: all 0.2s;
-}
-.bookmark:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-
-/* === Stats === */
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
-}
-.stat-card {
-    text-align: center;
-    padding: 1.5rem;
-    background: var(--white);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
-.stat-number { font-size: 2rem; font-weight: 800; color: var(--accent); }
-.stat-label { font-size: 0.9rem; color: var(--text-light); margin-top: 0.3rem; }
-
-/* === Responsive === */
-@media (max-width: 768px) {
-    .nav-toggle { display: block; }
-    .nav-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(26,26,46,0.98);
-        backdrop-filter: blur(12px);
-        flex-direction: column;
-        padding: 1rem;
-    }
-    .nav-menu.active { display: flex; }
-    .nav-menu li a { padding: 0.8rem 1rem; }
-    .hero h1 { font-size: 2.2rem; letter-spacing: 2px; }
-    .hero { min-height: 70vh; padding: 5rem 1.5rem; }
-    .hero-glow { display: none; }
-    .columns, .cols-2, .cols-3, .cols-4 { grid-template-columns: 1fr; }
-    .content { padding: 2rem 1rem 3rem; }
-    .footer-content { grid-template-columns: 1fr; }
-    .page-header { padding: 6rem 1.5rem 1.5rem; }
-    .page-header h1 { font-size: 1.8rem; }
-    .notion-h1 { font-size: 1.7rem; }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>문의하기 | KACA 한국아트크래프트협회</title>
+  <meta name="description" content="한국아트크래프트협회에 문의하거나 오시는 길을 확인하세요." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <nav class="navbar"><div class="nav-container"><a href="index.html" class="nav-logo">KACA</a><button class="nav-toggle" onclick="document.querySelector('.nav-menu').classList.toggle('active')">☰</button><ul class="nav-menu"><li><a href="index.html">홈</a></li><li><a href="about.html">협회소개</a></li><li><a href="education.html">교육과정</a></li><li><a href="certification.html">자격증 안내</a></li><li><a href="exhibitions.html">전시회 & 갤러리</a></li><li><a href="centers.html">교육처 안내</a></li><li><a href="contact.html" class="active">문의하기</a></li></ul></div></nav>
-    
-        <div class="page-header">
-            <h1>문의하기</h1>
-            <p>입회 · 교육 · 제휴 문의</p>
-        </div>
-        
-    <main class="content">
-        <h1 class="notion-h1"><strong>문의하기</strong></h1><div class="spacer"></div><p>협회 가입, 교육 수강, 전시회 참가, 제품 구매 등 궁금한 점이 있으시면 편하게 연락해 주세요.</p><div class="spacer"></div><hr class="notion-divider"><h2 class="notion-h2"><strong>연락처</strong></h2><div class="spacer"></div><div class="columns cols-2"><div class="column"><div class="callout"><span class="callout-icon">📧</span><div class="callout-text"><strong>이메일</strong><p>info@kaca.or.kr</p><div class="spacer"></div><p>영업일 기준 1~2일 내 답변</p></div></div></div><div class="column"><div class="callout"><span class="callout-icon">📱</span><div class="callout-text"><strong>전화</strong><p>010-XXXX-XXXX</p><div class="spacer"></div><p>평일 10:00 ~ 18:00</p></div></div></div></div><div class="spacer"></div><div class="columns cols-2"><div class="column"><div class="callout"><span class="callout-icon">📍</span><div class="callout-text"><strong>주소</strong><p>서울특별시 (상세 주소 추후 업데이트)</p></div></div></div><div class="column"><div class="callout"><span class="callout-icon">🔗</span><div class="callout-text"><strong>SNS</strong><p>Instagram: @korea_art_craft</p><p>Band: 한국아트크래프트협회</p></div></div></div></div><div class="spacer"></div><hr class="notion-divider"><h2 class="notion-h2"><strong>문의 유형별 안내</strong></h2><div class="spacer"></div><details class="notion-toggle"><summary><strong>협회 가입 문의</strong></summary><div class="toggle-content"><p>협회 가입을 원하시면 이메일로 성함, 연락처, 관심 분야를 보내주세요.</p><p>가입비 및 회원 혜택에 대해 상세히 안내해 드립니다.</p></div></details><details class="notion-toggle"><summary><strong>교육 수강 문의</strong></summary><div class="toggle-content"><p>원하시는 과정과 지역을 알려주시면 가까운 교육처와 일정을 안내해 드립니다.</p></div></details><details class="notion-toggle"><summary><strong>전시회 참가 문의</strong></summary><div class="toggle-content"><p>전시회 참가를 원하시는 협회원은 이메일로 작품 포트폴리오를 보내주세요.</p></div></details><details class="notion-toggle"><summary><strong>제품 구매 문의</strong></summary><div class="toggle-content"><p>퓨어리움, 크리스탈레진 등 제품 구매는 이메일로 문의해 주세요.</p></div></details><details class="notion-toggle"><summary><strong>기업/단체 출강 문의</strong></summary><div class="toggle-content"><p>팀빌딩, 문화 체험 등 기업/단체 출강 프로그램을 운영하고 있습니다.</p><p>인원, 일시, 장소를 알려주시면 맞춤 견적을 안내해 드립니다.</p></div></details>
-    </main>
-    
-<footer class="footer">
-    <div class="footer-content">
-        <div>
-            <h3>KACA</h3>
-            <p>한국아트크래프트협회</p>
-            <p style="margin-top:0.5rem;font-size:0.9rem">마블플루이드아트의 아름다움을 세상에 전합니다</p>
-        </div>
-        <div>
-            <h3>바로가기</h3>
-            <p><a href="about.html">협회소개</a></p>
-            <p><a href="education.html">교육과정</a></p>
-            <p><a href="exhibitions.html">전시회 &amp; 갤러리</a></p>
-            <p><a href="contact.html">문의하기</a></p>
-        </div>
-        <div>
-            <h3>연락처</h3>
-            <p>Email: info@kaca-art.com</p>
-            <p>Band: 한국아트크래프트협회</p>
-        </div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-main">KACA</span>
+        <span class="navbar__logo-sub">한국아트크래프트협회</span>
+      </a>
+      <nav class="navbar__menu" id="navMenu">
+        <a href="index.html">홈</a>
+        <a href="about.html">협회 소개</a>
+        <a href="exhibitions.html">전시 안내</a>
+        <a href="education.html">교육 프로그램</a>
+        <a href="contact.html" class="active">문의하기</a>
+      </nav>
+      <button class="navbar__toggle" id="navToggle" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-    <div class="footer-bottom">
-        <p>&copy; 2026 한국아트크래프트협회 (KACA). All rights reserved.</p>
-        <p class="tech">Notion CMS + Static Site | Built by WOOKVAN</p>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <div class="page-header">
+      <div class="container">
+        <span class="section-label" style="color:#93c5fd;">Contact</span>
+        <h1>문의하기</h1>
+        <p>궁금한 점이 있으시면 언제든지 연락 주세요. 빠르게 답변 드리겠습니다.</p>
+      </div>
     </div>
-</footer>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+
+          <!-- ---- FORM ---- -->
+          <div>
+            <div class="contact-form">
+              <h3>문의 양식</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">이름 <span style="color:#ef4444;">*</span></label>
+                  <input type="text" id="name" name="name" placeholder="홍길동" />
+                </div>
+                <div class="form-group">
+                  <label for="email">이메일 <span style="color:#ef4444;">*</span></label>
+                  <input type="email" id="email" name="email" placeholder="example@email.com" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="phone">연락처</label>
+                  <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" />
+                </div>
+                <div class="form-group">
+                  <label for="subject">문의 유형 <span style="color:#ef4444;">*</span></label>
+                  <select id="subject" name="subject">
+                    <option value="" disabled selected>선택해 주세요</option>
+                    <option>교육 프로그램 문의</option>
+                    <option>전시 참여 문의</option>
+                    <option>자격증 문의</option>
+                    <option>회원 가입 문의</option>
+                    <option>기타 문의</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">제목 <span style="color:#ef4444;">*</span></label>
+                <input type="text" id="title" name="title" placeholder="문의 제목을 입력해 주세요" />
+              </div>
+              <div class="form-group">
+                <label for="message">문의 내용 <span style="color:#ef4444;">*</span></label>
+                <textarea id="message" name="message" rows="6" placeholder="문의하실 내용을 자세히 작성해 주세요."></textarea>
+              </div>
+              <div class="form-group" style="display:flex; align-items:flex-start; gap:10px;">
+                <input type="checkbox" id="privacy" name="privacy" style="width:auto; margin-top:3px;" />
+                <label for="privacy" style="font-weight:400; color:#6b7280; font-size:0.88rem; cursor:pointer;">
+                  개인정보 수집 및 이용에 동의합니다. 수집된 정보는 문의 답변 목적으로만 사용됩니다.
+                </label>
+              </div>
+              <button type="button" class="btn btn--primary" style="width:100%; justify-content:center; margin-top:4px;" onclick="alert('문의가 접수되었습니다. 빠른 시일 내에 답변 드리겠습니다.')">
+                문의 보내기
+              </button>
+              <p style="font-size:0.8rem; color:#9ca3af; text-align:center; margin-top:12px;">
+                * 이 양식은 데모용입니다. 실제 전송 기능은 별도 연동이 필요합니다.
+              </p>
+            </div>
+          </div>
+
+          <!-- ---- INFO PANEL ---- -->
+          <div class="contact-info-panel">
+
+            <!-- Contact Info -->
+            <div class="info-card">
+              <h4>연락처 안내</h4>
+              <div class="info-item">
+                <div class="info-item__icon">📞</div>
+                <div class="info-item__text">
+                  <div class="info-item__label">전화 문의</div>
+                  <div class="info-item__value">02-0000-0000</div>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-item__icon">✉️</div>
+                <div class="info-item__text">
+                  <div class="info-item__label">이메일</div>
+                  <div class="info-item__value">info@kaca.or.kr</div>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-item__icon">🕐</div>
+                <div class="info-item__text">
+                  <div class="info-item__label">운영 시간</div>
+                  <div class="info-item__value">평일 09:00 – 18:00<br /><span style="font-size:0.8rem; color:#9ca3af;">주말 및 공휴일 휴무</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Address / Map -->
+            <div class="info-card">
+              <h4>오시는 길</h4>
+              <div class="map-placeholder">
+                <div class="map-placeholder__icon">📍</div>
+                <div>지도 영역 (카카오/네이버 지도 삽입 가능)</div>
+              </div>
+              <div class="info-item" style="margin-top:16px;">
+                <div class="info-item__icon">🏢</div>
+                <div class="info-item__text">
+                  <div class="info-item__label">주소</div>
+                  <div class="info-item__value">서울특별시 종로구 인사동길 00<br />KACA 빌딩 3층</div>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-item__icon">🚇</div>
+                <div class="info-item__text">
+                  <div class="info-item__label">대중교통</div>
+                  <div class="info-item__value">3호선 안국역 2번 출구 도보 5분<br />1·3·5호선 종로3가역 6번 출구 도보 8분</div>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-item__icon">🚗</div>
+                <div class="info-item__text">
+                  <div class="info-item__label">주차 안내</div>
+                  <div class="info-item__value">전용 주차장 없음. 인근 공영주차장 이용 권장.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Departments -->
+            <div class="info-card">
+              <h4>부서별 연락처</h4>
+              <div class="info-item">
+                <div class="info-item__icon">📚</div>
+                <div class="info-item__text">
+                  <div class="info-item__label">교육팀</div>
+                  <div class="info-item__value">education@kaca.or.kr</div>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-item__icon">🎨</div>
+                <div class="info-item__text">
+                  <div class="info-item__label">전시팀</div>
+                  <div class="info-item__value">exhibition@kaca.or.kr</div>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-item__icon">🏅</div>
+                <div class="info-item__text">
+                  <div class="info-item__label">자격증 담당</div>
+                  <div class="info-item__value">cert@kaca.or.kr</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ TEASER ===== -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">FAQ</span>
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div style="max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
+
+          <details style="border:1px solid #e5e7eb; border-radius:8px; background:#fff; overflow:hidden;">
+            <summary style="padding:18px 22px; font-weight:600; color:#0a1628; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; font-size:0.96rem;">
+              협회 회원이 되려면 어떻게 해야 하나요?
+              <span style="color:#3b82f6; font-size:1.1rem;">+</span>
+            </summary>
+            <div style="padding:0 22px 18px; font-size:0.9rem; color:#6b7280; line-height:1.7; border-top:1px solid #f3f4f6;">
+              협회 홈페이지의 문의 양식을 통해 회원 가입 신청을 하시거나, info@kaca.or.kr 로 이메일을 보내주시면 안내해 드립니다. 개인 회원과 단체 회원 모두 가입 가능합니다.
+            </div>
+          </details>
+
+          <details style="border:1px solid #e5e7eb; border-radius:8px; background:#fff; overflow:hidden;">
+            <summary style="padding:18px 22px; font-weight:600; color:#0a1628; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; font-size:0.96rem;">
+              교육 프로그램은 비회원도 수강 가능한가요?
+              <span style="color:#3b82f6; font-size:1.1rem;">+</span>
+            </summary>
+            <div style="padding:0 22px 18px; font-size:0.9rem; color:#6b7280; line-height:1.7; border-top:1px solid #f3f4f6;">
+              네, 비회원도 일부 교육 과정에 참여하실 수 있습니다. 다만 회원의 경우 수강료 할인 및 우선 등록 혜택이 제공됩니다. 자세한 내용은 교육팀으로 문의해 주세요.
+            </div>
+          </details>
+
+          <details style="border:1px solid #e5e7eb; border-radius:8px; background:#fff; overflow:hidden;">
+            <summary style="padding:18px 22px; font-weight:600; color:#0a1628; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; font-size:0.96rem;">
+              KACA 자격증은 어디서 활용할 수 있나요?
+              <span style="color:#3b82f6; font-size:1.1rem;">+</span>
+            </summary>
+            <div style="padding:0 22px 18px; font-size:0.9rem; color:#6b7280; line-height:1.7; border-top:1px solid #f3f4f6;">
+              KACA 공인 자격증은 공방 운영, 문화센터 강사 활동, 공예 교육 기관 취업 등 다양한 분야에서 활용됩니다. 협회는 자격증 취득자의 취업 및 창업을 지원하는 네트워크를 운영하고 있습니다.
+            </div>
+          </details>
+
+          <details style="border:1px solid #e5e7eb; border-radius:8px; background:#fff; overflow:hidden;">
+            <summary style="padding:18px 22px; font-weight:600; color:#0a1628; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; font-size:0.96rem;">
+              전시에 작품을 출품하려면 어떻게 해야 하나요?
+              <span style="color:#3b82f6; font-size:1.1rem;">+</span>
+            </summary>
+            <div style="padding:0 22px 18px; font-size:0.9rem; color:#6b7280; line-height:1.7; border-top:1px solid #f3f4f6;">
+              정기 전시의 경우 협회 정회원이면 출품 신청이 가능합니다. 각 전시 시즌 2개월 전에 공고가 게시되며, 전시팀 심사를 거쳐 선정됩니다. 기획 전시는 별도 공모 과정을 통해 모집합니다.
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-name">한국아트크래프트협회</div>
+          <div class="footer__brand-en">KOREA ART CRAFT ASSOCIATION</div>
+          <p class="footer__brand-desc">예술 공예의 가치를 발굴하고 전문가와 애호가를 연결하는 국내 대표 아트크래프트 전문 단체입니다.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Quick Links</div>
+          <div class="footer__links">
+            <a href="index.html">홈</a>
+            <a href="about.html">협회 소개</a>
+            <a href="exhibitions.html">전시 안내</a>
+            <a href="education.html">교육 프로그램</a>
+            <a href="contact.html">문의하기</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <div class="footer__contact-list">
+            <div class="footer__contact-item"><span>TEL</span><span>02-0000-0000</span></div>
+            <div class="footer__contact-item"><span>EMAIL</span><span>info@kaca.or.kr</span></div>
+            <div class="footer__contact-item"><span>주소</span><span>서울특별시 종로구 인사동길 00</span></div>
+            <div class="footer__contact-item"><span>운영</span><span>평일 09:00 – 18:00</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">© 2026 한국아트크래프트협회. All rights reserved.</span>
+        <span class="footer__powered">Powered by <a href="#">WOOKVAN</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const navbar = document.getElementById('navbar');
+    toggle.addEventListener('click', () => {
+      navbar.classList.toggle('navbar--open');
+    });
+  </script>
 
 </body>
 </html>

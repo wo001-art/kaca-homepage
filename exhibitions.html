@@ -1,535 +1,242 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전시회 & 갤러리 - 한국아트크래프트협회 (KACA)</title>
-    <meta name="description" content="한국아트크래프트협회 - 마블플루이드아트, 레진아트, 크리스탈레진 전문 협회">
-    <!-- System font stack -->
-    <style>
-:root {
-    --primary: #1a1a2e;
-    --secondary: #16213e;
-    --accent: #c9a96e;
-    --accent-hover: #b8943f;
-    --text: #333;
-    --text-light: #666;
-    --bg: #f8f6f2;
-    --white: #fff;
-    --border: #e5e5e5;
-    --red: #e94560;
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-    font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-    color: var(--text);
-    background: var(--bg);
-    line-height: 1.7;
-}
-
-/* === Navigation === */
-.navbar {
-    background: rgba(26,26,46,0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-}
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-}
-.nav-logo {
-    color: var(--accent);
-    font-size: 1.5rem;
-    font-weight: 800;
-    text-decoration: none;
-    letter-spacing: 2px;
-    padding: 1rem 0;
-}
-.nav-menu {
-    list-style: none;
-    display: flex;
-    gap: 0;
-}
-.nav-menu li a {
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    padding: 1.2rem 1.2rem;
-    display: block;
-    font-size: 0.95rem;
-    transition: all 0.3s;
-    border-bottom: 3px solid transparent;
-}
-.nav-menu li a:hover,
-.nav-menu li a.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-    background: rgba(255,255,255,0.05);
-}
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-/* === Hero === */
-.hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, #0f3460 100%);
-    color: white;
-    text-align: center;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 6rem 2rem;
-    position: relative;
-    overflow: hidden;
-}
-.hero-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.2;
-    pointer-events: none;
-}
-.hero-glow-1 {
-    width: 400px; height: 400px;
-    background: var(--red);
-    top: 10%; left: 10%;
-    animation: float1 12s ease-in-out infinite;
-}
-.hero-glow-2 {
-    width: 350px; height: 350px;
-    background: var(--accent);
-    top: 30%; right: 10%;
-    animation: float2 10s ease-in-out infinite;
-}
-.hero-glow-3 {
-    width: 300px; height: 300px;
-    background: #533483;
-    bottom: 10%; left: 30%;
-    animation: float3 14s ease-in-out infinite;
-}
-@keyframes float1 {
-    0%,100% { transform: translate(0,0); }
-    50% { transform: translate(30px,-20px); }
-}
-@keyframes float2 {
-    0%,100% { transform: translate(0,0); }
-    50% { transform: translate(-20px,30px); }
-}
-@keyframes float3 {
-    0%,100% { transform: translate(0,0); }
-    50% { transform: translate(20px,20px); }
-}
-.hero h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 1.2rem;
-    position: relative;
-    letter-spacing: 4px;
-}
-.hero .subtitle {
-    font-size: 1.3rem;
-    opacity: 0.85;
-    position: relative;
-    max-width: 600px;
-    margin: 0 auto 2.5rem;
-    line-height: 1.8;
-}
-.hero-buttons {
-    display: flex;
-    gap: 1.2rem;
-    justify-content: center;
-    position: relative;
-}
-.btn {
-    padding: 1rem 2.5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s;
-    display: inline-block;
-}
-.btn-primary {
-    background: var(--accent);
-    color: white;
-    box-shadow: 0 4px 15px rgba(201,169,110,0.3);
-}
-.btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(201,169,110,0.4); }
-.btn-outline {
-    border: 2px solid rgba(255,255,255,0.4);
-    color: white;
-}
-.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
-
-/* === Content === */
-.content {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 2rem 5rem;
-}
-.page-header {
-    text-align: center;
-    padding: 8rem 2rem 3rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, #0f3460 100%);
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-.page-header::before {
-    content: '';
-    position: absolute;
-    top: -50%; right: -20%;
-    width: 400px; height: 400px;
-    background: var(--accent);
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.1;
-    pointer-events: none;
-}
-.page-header h1 {
-    font-size: 2.5rem;
-    color: white;
-    margin-bottom: 0.5rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    position: relative;
-}
-.page-header p {
-    color: rgba(255,255,255,0.7);
-    font-size: 1.1rem;
-    position: relative;
-}
-
-/* === Notion Blocks === */
-.notion-h1 {
-    font-size: 2.2rem;
-    color: var(--primary);
-    margin: 3.5rem 0 1.5rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 3px solid var(--accent);
-    font-weight: 800;
-}
-.notion-h2 {
-    font-size: 1.6rem;
-    color: var(--primary);
-    margin: 3rem 0 1rem;
-    font-weight: 700;
-}
-.notion-h3 {
-    font-size: 1.25rem;
-    color: var(--secondary);
-    margin: 2rem 0 0.8rem;
-    font-weight: 600;
-}
-p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
-.spacer { height: 1rem; }
-
-.notion-list {
-    margin: 0.5rem 0 1rem 1.5rem;
-}
-.notion-list li {
-    margin-bottom: 0.4rem;
-}
-.notion-list .nested {
-    margin-top: 0.3rem;
-}
-
-.notion-quote {
-    border-left: 4px solid var(--accent);
-    padding: 1rem 1.5rem;
-    margin: 1rem 0;
-    background: rgba(201,169,110,0.08);
-    font-style: italic;
-    color: var(--text-light);
-}
-
-.callout {
-    display: flex;
-    gap: 1rem;
-    padding: 1.5rem 2rem;
-    margin: 1.5rem 0;
-    border-radius: 8px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    color: var(--text);
-}
-.callout-icon { font-size: 1.3rem; flex-shrink: 0; }
-.callout-text { flex: 1; color: var(--text); }
-
-.notion-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2rem 0;
-}
-
-.notion-image {
-    margin: 2rem 0;
-    text-align: center;
-}
-.notion-image img {
-    max-width: 100%;
-    max-height: 500px;
-    width: auto;
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    transition: transform 0.3s;
-}
-.notion-image img:hover { transform: scale(1.02); }
-.notion-image figcaption {
-    margin-top: 0.5rem;
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-/* 컬럼 내 이미지는 꽉 채움 */
-.column .notion-image img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-}
-
-/* === Columns === */
-.columns {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-.cols-2 { grid-template-columns: repeat(2, 1fr); }
-.cols-3 { grid-template-columns: repeat(3, 1fr); }
-.cols-4 { grid-template-columns: repeat(2, 1fr); }  /* 4는 2x2로 표시 */
-.column {
-    background: var(--white);
-    border-radius: 8px;
-    padding: 2rem;
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    transition: all 0.3s ease;
-}
-.column:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-/* 다크 카드 (홀수번째 섹션용) */
-.content > .columns:nth-of-type(even) .column {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    border: none;
-}
-.content > .columns:nth-of-type(even) .column h3,
-.content > .columns:nth-of-type(even) .column .notion-h3 {
-    color: var(--accent);
-}
-.content > .columns:nth-of-type(even) .column p {
-    color: rgba(255,255,255,0.8);
-}
-
-/* === Table === */
-.table-wrapper {
-    overflow-x: auto;
-    margin: 1rem 0;
-}
-.notion-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--white);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
-.notion-table th, .notion-table td {
-    padding: 1rem 1.2rem;
-    border: 1px solid var(--border);
-    text-align: left;
-    font-size: 0.95rem;
-}
-.notion-table th, .notion-table .table-header th {
-    background: var(--primary);
-    color: white;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.notion-table tr:hover td {
-    background: rgba(201,169,110,0.05);
-}
-
-/* === Toggle === */
-.notion-toggle {
-    margin: 0.5rem 0;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-}
-.notion-toggle summary {
-    padding: 1rem 1.5rem;
-    cursor: pointer;
-    font-weight: 600;
-    background: var(--white);
-    transition: background 0.2s;
-}
-.notion-toggle summary:hover { background: #f0f0f0; }
-.toggle-content {
-    padding: 1rem 1.5rem;
-    border-top: 1px solid var(--border);
-    background: #fafafa;
-}
-
-/* === Footer === */
-.footer {
-    background: var(--primary);
-    color: rgba(255,255,255,0.7);
-    padding: 3rem 2rem 1.5rem;
-    margin-top: 3rem;
-}
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-}
-.footer h3 {
-    color: var(--accent);
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-.footer a {
-    color: rgba(255,255,255,0.7);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-.footer a:hover { color: var(--accent); }
-.footer-bottom {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    font-size: 0.85rem;
-}
-.footer-bottom .tech {
-    color: rgba(255,255,255,0.4);
-    font-size: 0.8rem;
-    margin-top: 0.3rem;
-}
-
-/* === Bookmark === */
-.bookmark {
-    display: block;
-    padding: 1rem 1.5rem;
-    margin: 1rem 0;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    text-decoration: none;
-    color: var(--text);
-    background: var(--white);
-    transition: all 0.2s;
-}
-.bookmark:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-
-/* === Stats === */
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
-}
-.stat-card {
-    text-align: center;
-    padding: 1.5rem;
-    background: var(--white);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
-.stat-number { font-size: 2rem; font-weight: 800; color: var(--accent); }
-.stat-label { font-size: 0.9rem; color: var(--text-light); margin-top: 0.3rem; }
-
-/* === Responsive === */
-@media (max-width: 768px) {
-    .nav-toggle { display: block; }
-    .nav-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(26,26,46,0.98);
-        backdrop-filter: blur(12px);
-        flex-direction: column;
-        padding: 1rem;
-    }
-    .nav-menu.active { display: flex; }
-    .nav-menu li a { padding: 0.8rem 1rem; }
-    .hero h1 { font-size: 2.2rem; letter-spacing: 2px; }
-    .hero { min-height: 70vh; padding: 5rem 1.5rem; }
-    .hero-glow { display: none; }
-    .columns, .cols-2, .cols-3, .cols-4 { grid-template-columns: 1fr; }
-    .content { padding: 2rem 1rem 3rem; }
-    .footer-content { grid-template-columns: 1fr; }
-    .page-header { padding: 6rem 1.5rem 1.5rem; }
-    .page-header h1 { font-size: 1.8rem; }
-    .notion-h1 { font-size: 1.7rem; }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>전시 안내 | KACA 한국아트크래프트협회</title>
+  <meta name="description" content="한국아트크래프트협회의 전시 일정과 기획 전시를 안내합니다." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <nav class="navbar"><div class="nav-container"><a href="index.html" class="nav-logo">KACA</a><button class="nav-toggle" onclick="document.querySelector('.nav-menu').classList.toggle('active')">☰</button><ul class="nav-menu"><li><a href="index.html">홈</a></li><li><a href="about.html">협회소개</a></li><li><a href="education.html">교육과정</a></li><li><a href="certification.html">자격증 안내</a></li><li><a href="exhibitions.html" class="active">전시회 & 갤러리</a></li><li><a href="centers.html">교육처 안내</a></li><li><a href="contact.html">문의하기</a></li></ul></div></nav>
-    
-        <div class="page-header">
-            <h1>전시회 & 갤러리</h1>
-            <p>최신 전시 일정과 작가 작품을 만나보세요</p>
-        </div>
-        
-    <main class="content">
-        <h1 class="notion-h1"><strong>전시회 &amp; 갤러리</strong></h1><div class="spacer"></div><p>마블플루이드아트의 다채로운 작품들을 만나보세요. 협회는 매년 2~3회 정기 전시회를 개최하고 있습니다.</p><div class="spacer"></div><hr class="notion-divider"><h2 class="notion-h2"><strong>2026 전시 일정</strong></h2><div class="spacer"></div><div class="callout"><span class="callout-icon">📅</span><div class="callout-text"><strong>🌸 2026 봄 전시회 — "봄의 색채"</strong><p>일시: 2026년 4월 (예정)</p><p>장소: 서울 갤러리</p><p>주제: 봄의 색채 — 플루이드아트의 새로운 흐름</p><div class="spacer"></div><p><strong>📌 참가 신청 접수 중</strong></p></div></div><div class="spacer"></div><hr class="notion-divider"><h2 class="notion-h2"><strong>지난 전시회</strong></h2><div class="spacer"></div><div class="callout"><span class="callout-icon">📅</span><div class="callout-text"><strong>🍂 2025 가을 전시회 — "플루이드 가을에 빠지다"</strong><p>일시: 2025년 10월</p><p>장소: 한국여성수련원 갤러리 '솔'</p><p>참가 작가: 25명</p><div class="spacer"></div><p>✅ 성공적 마무리</p></div></div><div class="spacer"></div><div class="callout"><span class="callout-icon">📅</span><div class="callout-text"><strong>🌻 2025 봄 전시회</strong><p>일시: 2025년 4월</p><p>장소: 서울 갤러리</p><p>참가 작가: 20명</p></div></div><div class="spacer"></div><hr class="notion-divider"><h2 class="notion-h2"><strong>작품 갤러리</strong></h2><div class="spacer"></div><p>협회 소속 아티스트들의 대표 작품을 감상하세요.</p><div class="spacer"></div><figure class="notion-image"><img src="images/img_004.svg" alt="마블플루이드아트 작품" loading="lazy"><figcaption><span style="color:#9b9a97"><em>마블플루이드아트 작품</em></span></figcaption></figure><div class="spacer"></div><figure class="notion-image"><img src="images/img_005.jpg" alt="플루이드아트 색채 표현" loading="lazy"><figcaption><span style="color:#9b9a97"><em>플루이드아트 색채 표현</em></span></figcaption></figure><div class="spacer"></div><figure class="notion-image"><img src="images/img_006.jpg" alt="아트 전시" loading="lazy"><figcaption><span style="color:#9b9a97"><em>아트 전시</em></span></figcaption></figure><div class="spacer"></div><p><span style="color:#9b9a97"><em>(실제 협회 작품 사진으로 교체 예정)</em></span></p>
-    </main>
-    
-<footer class="footer">
-    <div class="footer-content">
-        <div>
-            <h3>KACA</h3>
-            <p>한국아트크래프트협회</p>
-            <p style="margin-top:0.5rem;font-size:0.9rem">마블플루이드아트의 아름다움을 세상에 전합니다</p>
-        </div>
-        <div>
-            <h3>바로가기</h3>
-            <p><a href="about.html">협회소개</a></p>
-            <p><a href="education.html">교육과정</a></p>
-            <p><a href="exhibitions.html">전시회 &amp; 갤러리</a></p>
-            <p><a href="contact.html">문의하기</a></p>
-        </div>
-        <div>
-            <h3>연락처</h3>
-            <p>Email: info@kaca-art.com</p>
-            <p>Band: 한국아트크래프트협회</p>
-        </div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-main">KACA</span>
+        <span class="navbar__logo-sub">한국아트크래프트협회</span>
+      </a>
+      <nav class="navbar__menu" id="navMenu">
+        <a href="index.html">홈</a>
+        <a href="about.html">협회 소개</a>
+        <a href="exhibitions.html" class="active">전시 안내</a>
+        <a href="education.html">교육 프로그램</a>
+        <a href="contact.html">문의하기</a>
+      </nav>
+      <button class="navbar__toggle" id="navToggle" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-    <div class="footer-bottom">
-        <p>&copy; 2026 한국아트크래프트협회 (KACA). All rights reserved.</p>
-        <p class="tech">Notion CMS + Static Site | Built by WOOKVAN</p>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <div class="page-header">
+      <div class="container">
+        <span class="section-label" style="color:#93c5fd;">Exhibitions</span>
+        <h1>전시 안내</h1>
+        <p>KACA 회원 작가들의 작품과 기획 전시를 만나보세요.</p>
+      </div>
     </div>
-</footer>
+
+    <!-- ===== EXHIBITION GRID ===== -->
+    <section class="section">
+      <div class="container">
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <button class="filter-btn active">전체</button>
+          <button class="filter-btn">정기 전시</button>
+          <button class="filter-btn">기획 전시</button>
+          <button class="filter-btn">특별 전시</button>
+          <button class="filter-btn">국제 교류</button>
+        </div>
+
+        <!-- Grid -->
+        <div class="exhibition-grid">
+
+          <!-- Card 1 -->
+          <div class="ex-card">
+            <div class="ex-card__image" style="background: linear-gradient(135deg, #1e3a5f, #2563eb);">
+              정기 전시
+            </div>
+            <div class="ex-card__body">
+              <div class="ex-card__category">정기 전시</div>
+              <div class="ex-card__title">2026 상반기 정기 전시회 — "경계를 넘어"</div>
+              <div class="ex-card__date">2026.03.15 – 04.10 · 서울 종로 KACA 갤러리</div>
+              <p class="ex-card__desc">회원 작가 32명의 신작을 중심으로 구성된 상반기 정기 전시. 전통과 현대를 넘나드는 다양한 공예 작품을 선보입니다.</p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="ex-card">
+            <div class="ex-card__image" style="background: linear-gradient(135deg, #1a2e1a, #16a34a);">
+              기획 전시
+            </div>
+            <div class="ex-card__body">
+              <div class="ex-card__category">기획 전시</div>
+              <div class="ex-card__title">자연을 담다 — 천연 소재 공예전</div>
+              <div class="ex-card__date">2026.02.01 – 02.28 · 인사동 전시관</div>
+              <p class="ex-card__desc">천연 소재를 활용한 공예 작품 특별 기획전. 도예, 나무, 천연 섬유 등 자연 친화적 소재로 만든 60여 점이 전시됩니다.</p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="ex-card">
+            <div class="ex-card__image" style="background: linear-gradient(135deg, #3b0764, #7c3aed);">
+              국제 교류
+            </div>
+            <div class="ex-card__body">
+              <div class="ex-card__category">국제 교류</div>
+              <div class="ex-card__title">한·일 공예 교류전 — "두 나라의 손"</div>
+              <div class="ex-card__date">2026.01.10 – 01.31 · KACA 제2전시실</div>
+              <p class="ex-card__desc">한국과 일본 공예 협회 공동 기획 교류전. 양국 전통 공예의 공통점과 차이점을 작품을 통해 탐구합니다.</p>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="ex-card">
+            <div class="ex-card__image" style="background: linear-gradient(135deg, #7c2020, #dc2626);">
+              특별 전시
+            </div>
+            <div class="ex-card__body">
+              <div class="ex-card__category">특별 전시</div>
+              <div class="ex-card__title">신진 작가 발굴 프로젝트 2025</div>
+              <div class="ex-card__date">2025.11.15 – 12.20 · 홍대 팝업 갤러리</div>
+              <p class="ex-card__desc">2025년 신진 작가 발굴 프로젝트 최종 선정 작가 8명의 작품 전시. 협회가 주목하는 차세대 공예 아티스트들을 만나보세요.</p>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="ex-card">
+            <div class="ex-card__image" style="background: linear-gradient(135deg, #0c2340, #0ea5e9);">
+              정기 전시
+            </div>
+            <div class="ex-card__body">
+              <div class="ex-card__category">정기 전시</div>
+              <div class="ex-card__title">2025 하반기 정기 전시회 — "기억과 재료"</div>
+              <div class="ex-card__date">2025.09.01 – 09.30 · 서울 종로 KACA 갤러리</div>
+              <p class="ex-card__desc">회원 작가 28명이 참여한 하반기 정기 전시. 개인의 기억을 공예 재료로 풀어낸 감성적인 작품들로 구성됩니다.</p>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="ex-card">
+            <div class="ex-card__image" style="background: linear-gradient(135deg, #422006, #d97706);">
+              기획 전시
+            </div>
+            <div class="ex-card__body">
+              <div class="ex-card__category">기획 전시</div>
+              <div class="ex-card__title">도시의 공예 — 현대 생활 공예전</div>
+              <div class="ex-card__date">2025.07.01 – 08.15 · 성수동 팝업 스페이스</div>
+              <p class="ex-card__desc">현대 도시 생활과 공예의 접점을 탐구하는 기획전. 생활용품, 인테리어 소품 등 실용적 공예 작품 50여 점이 전시됩니다.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== EXHIBITION INFO ===== -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Visit Info</span>
+          <h2>관람 안내</h2>
+        </div>
+        <div class="card-grid card-grid--3">
+
+          <div class="card">
+            <div class="card__icon">🕐</div>
+            <div class="card__title">관람 시간</div>
+            <p class="card__desc">화 – 일: 10:00 – 18:00<br />월요일 및 공휴일 휴관<br />입장 마감: 관람 종료 30분 전</p>
+          </div>
+
+          <div class="card">
+            <div class="card__icon">💳</div>
+            <div class="card__title">입장료</div>
+            <p class="card__desc">일반: 5,000원<br />협회 회원: 무료<br />학생(만 19세 이하): 3,000원<br />단체(10인 이상): 30% 할인</p>
+          </div>
+
+          <div class="card">
+            <div class="card__icon">📍</div>
+            <div class="card__title">오시는 길</div>
+            <p class="card__desc">서울 종로구 인사동길 00<br />3호선 안국역 2번 출구 도보 5분<br />주차: 인근 공영주차장 이용</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section" style="text-align:center;">
+      <div class="container">
+        <span class="section-label">전시 참여</span>
+        <h2 style="margin-bottom:16px;">작가로 참여하고 싶으신가요?</h2>
+        <p style="color:#6b7280; max-width:440px; margin:0 auto 28px;">
+          협회 회원 작가라면 정기 전시 및 기획 전시에 작품을 출품할 수 있습니다. 자세한 사항은 문의해 주세요.
+        </p>
+        <a href="contact.html" class="btn btn--primary">출품 문의하기</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-name">한국아트크래프트협회</div>
+          <div class="footer__brand-en">KOREA ART CRAFT ASSOCIATION</div>
+          <p class="footer__brand-desc">예술 공예의 가치를 발굴하고 전문가와 애호가를 연결하는 국내 대표 아트크래프트 전문 단체입니다.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Quick Links</div>
+          <div class="footer__links">
+            <a href="index.html">홈</a>
+            <a href="about.html">협회 소개</a>
+            <a href="exhibitions.html">전시 안내</a>
+            <a href="education.html">교육 프로그램</a>
+            <a href="contact.html">문의하기</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <div class="footer__contact-list">
+            <div class="footer__contact-item"><span>TEL</span><span>02-0000-0000</span></div>
+            <div class="footer__contact-item"><span>EMAIL</span><span>info@kaca.or.kr</span></div>
+            <div class="footer__contact-item"><span>주소</span><span>서울특별시 종로구 인사동길 00</span></div>
+            <div class="footer__contact-item"><span>운영</span><span>평일 09:00 – 18:00</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">© 2026 한국아트크래프트협회. All rights reserved.</span>
+        <span class="footer__powered">Powered by <a href="#">WOOKVAN</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const navbar = document.getElementById('navbar');
+    toggle.addEventListener('click', () => {
+      navbar.classList.toggle('navbar--open');
+    });
+
+    // Simple filter (visual only)
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
 
 </body>
 </html>
