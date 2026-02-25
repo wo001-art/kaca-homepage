@@ -219,17 +219,17 @@ def blocks_to_html(blocks):
 def get_nav_html(current_slug=""):
     """네비게이션 HTML 생성"""
     nav = '<nav class="navbar"><div class="nav-container">'
-    nav += '<a href="/" class="nav-logo">KACA</a>'
+    nav += '<a href="index.html" class="nav-logo">KACA</a>'
     nav += '<button class="nav-toggle" onclick="document.querySelector(\'.nav-menu\').classList.toggle(\'active\')">☰</button>'
     nav += '<ul class="nav-menu">'
 
     active = ' class="active"' if current_slug == "" else ""
-    nav += f'<li><a href="/"{active}>홈</a></li>'
+    nav += f'<li><a href="index.html"{active}>홈</a></li>'
 
     for pid, info in SUBPAGES.items():
         if info.get("nav"):
             active = ' class="active"' if current_slug == info["slug"] else ""
-            nav += f'<li><a href="/{info["slug"]}.html"{active}>{info["title"]}</a></li>'
+            nav += f'<li><a href="{info["slug"]}.html"{active}>{info["title"]}</a></li>'
 
     nav += '</ul></div></nav>'
     return nav
@@ -638,10 +638,10 @@ def get_footer_html():
         </div>
         <div>
             <h3>바로가기</h3>
-            <p><a href="/about.html">협회소개</a></p>
-            <p><a href="/education.html">교육과정</a></p>
-            <p><a href="/exhibitions.html">전시회 &amp; 갤러리</a></p>
-            <p><a href="/contact.html">문의하기</a></p>
+            <p><a href="about.html">협회소개</a></p>
+            <p><a href="education.html">교육과정</a></p>
+            <p><a href="exhibitions.html">전시회 &amp; 갤러리</a></p>
+            <p><a href="contact.html">문의하기</a></p>
         </div>
         <div>
             <h3>연락처</h3>
@@ -668,8 +668,8 @@ def build_page(title, content_html, slug="", is_home=False):
             <h1>한국아트크래프트협회</h1>
             <p>마블플루이드아트의 아름다움을 세상에 전합니다</p>
             <div class="hero-buttons">
-                <a href="/exhibitions.html" class="btn btn-primary">전시회 보기</a>
-                <a href="/education.html" class="btn btn-outline">교육 안내</a>
+                <a href="exhibitions.html" class="btn btn-primary">전시회 보기</a>
+                <a href="education.html" class="btn btn-outline">교육 안내</a>
             </div>
         </section>
         """
