@@ -10,6 +10,7 @@ import requests
 import json
 import os
 import shutil
+import hashlib
 from datetime import datetime
 
 NOTION_TOKEN = os.environ.get("NOTION_TOKEN", "")
@@ -21,6 +22,62 @@ HEADERS = {
     "Notion-Version": "2022-06-28",
 }
 OUTPUT_DIR = "output"
+IMAGES_DIR = os.path.join(OUTPUT_DIR, "images")
+
+def _generate_placeholder(filename):
+    """SVG 플레이스홀더 생성"""
+    svg = '''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+<rect fill="#1a1a2e" width="800" height="400"/>
+<text fill="#c9a96e" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle" x="400" y="190">KACA</text>
+<text fill="rgba(255,255,255,0.5)" font-family="sans-serif" font-size="16" text-anchor="middle" x="400" y="220">한국아트크래프트협회</text>
+</svg>'''
+    svgname = filename.rsplit(".", 1)[0] + ".svg"
+    svgpath = os.path.join(IMAGES_DIR, svgname)
+    os.makedirs(IMAGES_DIR, exist_ok=True)
+    with open(svgpath, "w", encoding="utf-8") as f:
+        f.write(svg)
+    print(f"    Placeholder: {svgname}")
+    return f"images/{svgname}"
+
+_img_counter = 0
+def download_image(url, block_id):
+    """이미지를 다운로드하여 로컬에 저장, 로컬 경로 반환"""
+    global _img_counter
+    _img_counter += 1
+    try:
+        ext = ".jpg"
+        url_base = url.split("?")[0]
+        if ".png" in url_base:
+            ext = ".png"
+        elif ".webp" in url_base:
+            ext = ".webp"
+        elif ".gif" in url_base:
+            ext = ".gif"
+        filename = f"img_{_img_counter:03d}{ext}"
+        filepath = os.path.join(IMAGES_DIR, filename)
+        r = requests.get(url, timeout=30)
+        if r.status_code == 200 and len(r.content) > 100:
+            # Content-Type 기반 확장자 보정
+            ct = r.headers.get("Content-Type", "")
+            if "png" in ct:
+                ext = ".png"
+            elif "webp" in ct:
+                ext = ".webp"
+            elif "gif" in ct:
+                ext = ".gif"
+            filename = f"img_{_img_counter:03d}{ext}"
+            filepath = os.path.join(IMAGES_DIR, filename)
+            os.makedirs(IMAGES_DIR, exist_ok=True)
+            with open(filepath, "wb") as f:
+                f.write(r.content)
+            print(f"    Downloaded: {filename} ({len(r.content):,} bytes)")
+            return f"images/{filename}"
+        else:
+            print(f"    Image download failed: {r.status_code} - generating placeholder")
+            return _generate_placeholder(filename)
+    except Exception as e:
+        print(f"    Image download error: {e}")
+        return url
 
 # 서브페이지 매핑
 SUBPAGES = {
@@ -136,6 +193,9 @@ def block_to_html(block, depth=0):
 
     elif btype == "image":
         src = bdata.get("file", {}).get("url", "") or bdata.get("external", {}).get("url", "")
+        # Notion 임시 URL은 다운로드하여 로컬 저장
+        if src:
+            src = download_image(src, block["id"])
         caption_html = rich_text_to_html(bdata.get("caption", []))
         # alt 속성에는 plain text만
         caption_plain = " ".join([r.get("plain_text", "") for r in bdata.get("caption", [])])
@@ -510,9 +570,10 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
     background: var(--white);
     border: 1px solid var(--border);
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    color: var(--text);
 }
 .callout-icon { font-size: 1.3rem; flex-shrink: 0; }
-.callout-text { flex: 1; }
+.callout-text { flex: 1; color: var(--text); }
 
 .notion-divider {
     border: none;
