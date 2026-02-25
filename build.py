@@ -132,9 +132,11 @@ def block_to_html(block, depth=0):
 
     elif btype == "image":
         src = bdata.get("file", {}).get("url", "") or bdata.get("external", {}).get("url", "")
-        caption = rich_text_to_html(bdata.get("caption", []))
-        cap_html = f'<figcaption>{caption}</figcaption>' if caption else ""
-        return f'<figure class="notion-image"><img src="{src}" alt="{caption}" loading="lazy">{cap_html}</figure>'
+        caption_html = rich_text_to_html(bdata.get("caption", []))
+        # alt 속성에는 plain text만
+        caption_plain = " ".join([r.get("plain_text", "") for r in bdata.get("caption", [])])
+        cap_html = f'<figcaption>{caption_html}</figcaption>' if caption_html else ""
+        return f'<figure class="notion-image"><img src="{src}" alt="{caption_plain}" loading="lazy">{cap_html}</figure>'
 
     elif btype == "toggle":
         text = rich_text_to_html(bdata.get("rich_text", []))
@@ -162,12 +164,15 @@ def block_to_html(block, depth=0):
 
     elif btype == "column_list":
         children = get_children(block["id"])
+        col_count = len(children)
         cols_html = ""
         for col in children:
             col_children = get_children(col["id"])
             col_content = "".join(block_to_html(c, depth+1) for c in col_children)
             cols_html += f'<div class="column">{col_content}</div>'
-        return f'<div class="columns">{cols_html}</div>'
+        # 컬럼 수에 따라 그리드 클래스 지정
+        grid_class = f"columns cols-{col_count}" if col_count <= 4 else "columns"
+        return f'<div class="{grid_class}">{cols_html}</div>'
 
     elif btype == "child_page":
         return ""  # 서브페이지는 별도 처리
@@ -418,12 +423,22 @@ body {
 }
 .page-header {
     text-align: center;
-    padding: 8rem 2rem 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    padding: 8rem 2rem 3rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, #0f3460 100%);
     color: white;
-    margin-top: 0;
+    position: relative;
+    overflow: hidden;
+}
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 400px; height: 400px;
+    background: var(--accent);
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.1;
+    pointer-events: none;
 }
 .page-header h1 {
     font-size: 2.5rem;
@@ -431,10 +446,12 @@ body {
     margin-bottom: 0.5rem;
     font-weight: 800;
     letter-spacing: 2px;
+    position: relative;
 }
 .page-header p {
     color: rgba(255,255,255,0.7);
     font-size: 1.1rem;
+    position: relative;
 }
 
 /* === Notion Blocks === */
@@ -505,6 +522,9 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
 }
 .notion-image img {
     max-width: 100%;
+    max-height: 500px;
+    width: auto;
+    object-fit: contain;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
     transition: transform 0.3s;
@@ -515,6 +535,12 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
     color: var(--text-light);
     font-size: 0.9rem;
 }
+/* 컬럼 내 이미지는 꽉 채움 */
+.column .notion-image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
 
 /* === Columns === */
 .columns {
@@ -523,6 +549,9 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
     gap: 2rem;
     margin: 2rem 0;
 }
+.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cols-4 { grid-template-columns: repeat(2, 1fr); }  /* 4는 2x2로 표시 */
 .column {
     background: var(--white);
     border-radius: 16px;
@@ -689,7 +718,7 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
     .hero h1 { font-size: 2.2rem; letter-spacing: 2px; }
     .hero { min-height: 70vh; padding: 5rem 1.5rem; }
     .hero-glow { display: none; }
-    .columns { grid-template-columns: 1fr; }
+    .columns, .cols-2, .cols-3, .cols-4 { grid-template-columns: 1fr; }
     .content { padding: 2rem 1rem 3rem; }
     .footer-content { grid-template-columns: 1fr; }
     .page-header { padding: 6rem 1.5rem 1.5rem; }
@@ -749,9 +778,21 @@ def build_page(title, content_html, slug="", is_home=False):
         </section>
         """
     else:
+        # 페이지별 서브타이틀
+        subtitles = {
+            "about": "한국아트크래프트협회를 소개합니다",
+            "education": "전문 교육과정 안내",
+            "certification": "공인 자격증 취득 안내",
+            "exhibitions": "전시회 및 갤러리 소식",
+            "centers": "전국 교육처 안내",
+            "contact": "문의 및 상담 안내",
+        }
+        sub = subtitles.get(slug, "")
+        sub_html = f'<p>{sub}</p>' if sub else ""
         hero = f"""
         <div class="page-header">
             <h1>{title}</h1>
+            {sub_html}
         </div>
         """
 
