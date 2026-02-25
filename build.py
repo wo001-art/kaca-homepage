@@ -258,7 +258,7 @@ def get_css():
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body {
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     color: var(--text);
     background: var(--bg);
     line-height: 1.7;
@@ -502,7 +502,7 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
     gap: 1rem;
     padding: 1.5rem 2rem;
     margin: 1.5rem 0;
-    border-radius: 16px;
+    border-radius: 8px;
     background: var(--white);
     border: 1px solid var(--border);
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -525,7 +525,7 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
     max-height: 500px;
     width: auto;
     object-fit: contain;
-    border-radius: 16px;
+    border-radius: 8px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
     transition: transform 0.3s;
 }
@@ -554,7 +554,7 @@ p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
 .cols-4 { grid-template-columns: repeat(2, 1fr); }  /* 4는 2x2로 표시 */
 .column {
     background: var(--white);
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 2rem;
     border: 1px solid var(--border);
     box-shadow: 0 4px 15px rgba(0,0,0,0.06);
@@ -770,7 +770,7 @@ def build_page(title, content_html, slug="", is_home=False):
             <div class="hero-glow hero-glow-2"></div>
             <div class="hero-glow hero-glow-3"></div>
             <h1>한국아트크래프트협회</h1>
-            <p class="subtitle">마블플루이드아트의 아름다움을 세상에 전합니다</p>
+            <p class="subtitle">Korea Art Craft Association &mdash; 마블플루이드아트 · 레진아트 · 크리스탈레진</p>
             <div class="hero-buttons">
                 <a href="exhibitions.html" class="btn btn-primary">전시회 보기</a>
                 <a href="education.html" class="btn btn-outline">교육 안내</a>
@@ -780,12 +780,12 @@ def build_page(title, content_html, slug="", is_home=False):
     else:
         # 페이지별 서브타이틀
         subtitles = {
-            "about": "한국아트크래프트협회를 소개합니다",
-            "education": "전문 교육과정 안내",
-            "certification": "공인 자격증 취득 안내",
-            "exhibitions": "전시회 및 갤러리 소식",
-            "centers": "전국 교육처 안내",
-            "contact": "문의 및 상담 안내",
+            "about": "KACA의 비전과 조직, 활동 내역을 확인하세요",
+            "education": "마블플루이드아트 · 레진아트 · 크리스탈레진 전문 커리큘럼",
+            "certification": "KACA 공인 자격증 종류 · 취득 절차 · 응시 안내",
+            "exhibitions": "최신 전시 일정과 작가 작품을 만나보세요",
+            "centers": "전국 공인 교육처 위치 및 수강 안내",
+            "contact": "입회 · 교육 · 제휴 문의",
         }
         sub = subtitles.get(slug, "")
         sub_html = f'<p>{sub}</p>' if sub else ""
@@ -803,8 +803,7 @@ def build_page(title, content_html, slug="", is_home=False):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title} - 한국아트크래프트협회 (KACA)</title>
     <meta name="description" content="한국아트크래프트협회 - 마블플루이드아트, 레진아트, 크리스탈레진 전문 협회">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <!-- System font stack -->
     <style>{get_css()}</style>
 </head>
 <body>
